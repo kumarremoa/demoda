@@ -1,0 +1,11 @@
+http://www.zippyloft.com/demo/
+
+----------------------
+zippy loft
+http://www.hostmonster.com/
+username : www.zippyloft.com
+Password: Ap@ran1a
+
+phpmyadmin details
+username : ameyapar
+password : Ap@ran1a

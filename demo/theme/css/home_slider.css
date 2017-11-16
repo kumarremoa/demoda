@@ -1,0 +1,62 @@
+<!-- Bullet Navigator Skin Begin -->
+
+.jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+	background: url('../images/b05.png') no-repeat;
+	overflow: hidden;
+	cursor: pointer;
+	width: 30px; height: 46px; top: 175px; left: 0px;
+}
+
+.jssorb05 div {
+	background-position: -7px -7px;
+}
+
+	.jssorb05 div:hover, .jssorb05 .av:hover {
+		background-position: -37px -7px;
+	}
+
+.jssorb05 .av {
+	background-position: -67px -7px;
+}
+
+.jssorb05 .dn, .jssorb05 .dn:hover {
+	background-position: -97px -7px;
+}
+
+<!-- Arrow Navigator Skin Begin -->
+.jssora12l, .jssora12r, .jssora12ldn, .jssora12rdn {
+	position: absolute;
+	cursor: pointer;
+	display: block;
+	background: url('../images/a12.png') no-repeat;
+	overflow: hidden;
+	
+}
+
+.jssora12l {
+	background: url('../images/a12.png');
+	background-position: -16px -37px;
+}
+
+.jssora12r {
+	background: url('../images/a12.png');
+	background-position: -75px -37px;
+}
+
+.jssora12l:hover {
+	background: url('../images/a12.png') no-repeat;
+	background-position: -136px -37px;
+}
+
+.jssora12r:hover {
+	background: url('../images/a12.png') no-repeat;
+	background-position: -195px -37px;
+}
+
+.jssora12ldn {
+	background-position: -256px -37px;
+}
+
+.jssora12rdn {
+	background-position: -315px -37px;
+}
