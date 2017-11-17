@@ -16,8 +16,8 @@
 */
 
 //$config['base_url']	= '';
-$config['base_url']	= "/zippyloft/admin/index.php/";
-$config['site_url']	= "http://".$_SERVER['HTTP_HOST']."/zippyloft/admin/";
+$config['base_url']	= "/demoda/demoda.git/admin/index.php/";
+$config['site_url']	= "http://".$_SERVER['HTTP_HOST']."/demoda/demoda.git/admin/";
 $config['css_images_js_base_url']	= $config['site_url']."theme/";
 
 /*
