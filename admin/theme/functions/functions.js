@@ -1,4 +1,4 @@
-site_url = "/demo/admin/index.php/";
+site_url = "/demoda/demoda.git/admin/index.php/";
 
 
 function editSubcategory(id)
