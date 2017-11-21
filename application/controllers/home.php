@@ -62,6 +62,12 @@ class Home extends CI_Controller {
 		$this->load->view('template/footer_new');
 	}
 	
+	public function user($any , $num)
+	{
+		echo $any;
+		echo $num;
+		die('eci');
+	}
 	
 	// show static page
 	public function page($page_id)
