@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>::Zippy Loft::</title>
+<title><?=isset($seoData) ? $seoData['title']:'Demoda Secrets | Nightwear, Mothercare & Ethnic Wear'?></title>
+<meta name="description" content="<?= isset($seoData) ? $seoData['description'] : 'Get widest collection of quality nighty, mothercare & ethnic wear at Demoda. Shop online for Sleepshirts, Nighties, Kurtis, Nightgowns & more.' ?>" />
+
+<!-- <meta name="keywords" content="" /> -->
+<meta name="author" content="demodasecrets.com" />
 <?php 
+$this->load->view('template/appAsset');
 	// meta property for fb share
 	if($this->router->fetch_class() == 'product' && $this->router->fetch_method() == 'description')
 	{

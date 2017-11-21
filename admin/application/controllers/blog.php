@@ -58,7 +58,7 @@ class Blog extends CI_Controller {
 	
 		// check user is loggedin or not
 		$this->Usermodel->isLoggedIn();
-		
+		// print_r([$_POST, $_FILES]);die;
 		$this->Blogmodel->createBlog($_POST, $_FILES);
 		
 		$this->session->set_userdata('msg','Page has been added successfully.');

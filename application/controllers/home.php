@@ -54,11 +54,12 @@ class Home extends CI_Controller {
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
+		$data['seoData']  = $this->getSeoHomeComponents();
 		
 		// load home.php
-		$this->load->view('template/header',$data);
-		$this->load->view('home/home',$data);
-		$this->load->view('template/footer');
+		$this->load->view('template/header_new',$data);
+		//$this->load->view('home/home',$data);
+		$this->load->view('template/footer_new');
 	}
 	
 	
@@ -82,6 +83,14 @@ class Home extends CI_Controller {
 		$this->load->view('template/header',$data);
 		$this->load->view('home/static-page',$data);
 		$this->load->view('template/footer');
+	}
+
+	public function getSeoHomeComponents()
+	{
+		$seoData = [
+			'title' => 'Demoda Secrets | Nightwear, Mothercare & Ethnic Wear',
+			'description' => 'Get widest collection of quality nighty, mothercare & ethnic wear at Demoda. Shop online for Sleepshirts, Nighties, Kurtis, Nightgowns & more.'
+			];
 	}
 	
 }

@@ -11,7 +11,7 @@
                 <div class="col-sm-4">
                 	<h2>Shipping &amp; Returns</h2>
                     <ul class="futrlink">
-                    	<li><a href="<?php echo base_url() ?>return-policy" <?php if($this->uri->segment(1) == 'return-policy'){ echo 'class="active"'; } ?>>Return Policy</a></li>
+                    	<li><a href="<?= base_url('return-policy') ?>" <?php if($this->uri->segment(1) == 'return-policy'){ echo 'class="active"'; } ?>>Return Policy</a></li>
                         <li><a href="<?php echo base_url() ?>shipping-rates" <?php if($this->uri->segment(1) == 'shipping-rates'){ echo 'class="active"'; } ?>>Shipping Rates</a></li>
                         <li><a href="<?php echo base_url() ?>international-shipping-and-payment" <?php if($this->uri->segment(1) == 'international-shipping-and-payment'){ echo 'class="active"'; } ?>>International Shipping and Payment</a></li>
                     </ul>

@@ -19,7 +19,7 @@ class Blog extends CI_Controller {
      {
             parent::__construct();
             // Your own constructor code
-			$this->load->model('Blogmodel');	
+			$this->load->model('blogmodel');	
      }
 	   
 		

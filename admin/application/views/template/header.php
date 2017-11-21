@@ -57,7 +57,7 @@
                 <div class="navbar navbar-fixed-top">
                     <div class="navbar-inner">
                         <div class="container-fluid">
-                            <a class="brand" href="javascript:void(0);"><i class="icon-home icon-white"></i> Demoda Admin</a>
+                            <a href="<?=base_url();?>"class="brand" href="javascript:void(0);"><i class="icon-home icon-white"></i> Demoda Admin</a>
                             <ul class="nav user_menu pull-right">                                
                                 <li class="divider-vertical hidden-phone hidden-tablet"></li>
                                 <li class="dropdown">

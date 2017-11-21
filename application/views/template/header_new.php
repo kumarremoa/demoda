@@ -2,70 +2,71 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>B-Shop | Hero Slider</title>
-
-  <!--SEO Meta Tags-->
-  <meta name="description" content="Get widest collection of quality nighty, mothercare & ethnic wear at Demoda. Shop online for Sleepshirts, Nighties, Kurtis, Nightgowns & more." />
-  <meta name="keywords" content="" />
+  <title><?=isset($seoData) ? $seoData['title']:'Demoda Secrets | Nightwear, Mothercare & Ethnic Wear'?></title>
+  <meta name="description" content="<?= isset($seoData) ? $seoData['description'] : 'Get widest collection of quality nighty, mothercare & ethnic wear at Demoda. Shop online for Sleepshirts, Nighties, Kurtis, Nightgowns & more.' ?>" />
   <meta name="author" content="demodasecrets.com" />
-
+<?php 
+$this->load->view('template/appAsset');
+  // meta property for fb share
+  if($this->router->fetch_class() == 'product' && $this->router->fetch_method() == 'description')
+  {
+    // echo '<pre>'; print_r($product_details); echo '</pre>'; 
+    foreach($product_details as $product_detail)
+    {
+      // get featured image
+      if($product_detail->is_featured == '1')
+      {
+        //$product_details = $product_details[0];
+        $og_title = $product_detail->title;
+        $og_image = $this->config->item('site_url').'admin/uploads/products/large/'.$product_detail->file_name;
+        
+        $description = strip_tags($product_detail->description);
+        $og_description = (strlen($description) > 200) ? substr($description,0,190).'...' : $description;
+      }
+    }
+?>
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="<?php echo $og_title; ?>" />
+        <meta property="og:url" content="<?php echo $og_title; ?>" />
+        <meta property="og:image" content="<?php echo $og_image; ?>" />
+        <meta property="og:description" content="<?php echo $og_description; ?>" />
+<?php
+  } // end if (end of meta property)
+?>
+<?php $category_created = array();
+              $category = array();
+              $i = -1;
+              foreach($header_categories as $header_category)
+              {
+                $categoryId = $header_category->category_id;
+                if(!in_array($categoryId,$category_created))
+                {
+                  $i++;
+                  $category_created[] = $categoryId;
+                  $category[$i][] = $header_category;
+                }
+                else
+                {
+                  $key = array_search($categoryId, $category_created);
+                  $category[$key][] = $header_category;
+                }
+              }
+          ?>
   <!--Mobile Specific Meta Tag-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-<link rel="icon" href="<?php echo $this->config->item('css_images_js_base_url'); ?>images/favicon.ico" type="image/x-icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="<?php echo $this->config->item('css_images_js_base_url'); ?>css/bootstrap.css" type="text/css" media="screen">
-<!--[if lt IE 9]><script src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/ie8-responsive-file-warning.js"></script><![endif]-->
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-  <script src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/html5shiv.js"></script>
-  <script src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/respond.min.js"></script>
-<![endif]-->
-
-<script src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/jquery-1.11.1.js"></script>
-<script src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/functions.js"></script>
+  <!-- <link rel="icon" href="<?php echo $this->config->item('css_images_js_base_url'); ?>images/favicon.ico" type="image/x-icon" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <!--Favicon-->
-  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-  <link rel="icon" href="favicon.png" type="image/x-icon">
+  <!-- <link rel="shortcut icon" href="favicon.png" type="image/x-icon"> -->
+  <!-- <link rel="icon" href="favicon.png" type="image/x-icon"> -->
   <link rel="icon" href="<?= $this->config->item('css_images_js_base_url'); ?>images/favicon.ico" type="image/x-icon" />
-
-  <!-- Material & Socicon Icons Fonts -->
-  <link rel="stylesheet" href="stylesheets/vendor/socicon.min.css">
-  <link rel="stylesheet" href="stylesheets/vendor/material-icons.min.css">
-
-  <!-- Bootstrap Core -->
-  <link href="stylesheets/vendor/bootstrap.min.css" rel="stylesheet" media="screen">
-
-  <!-- Slick Carousel Default Styles -->
-  <link href="stylesheets/vendor/slick.css" rel="stylesheet" media="screen">
-
-  <!-- Modal Default Styles -->
-  <link href="stylesheets/vendor/magnific-popup.css" rel="stylesheet" media="screen">
-
-  <!-- Offcanvas Plugin -->
-  <link href="stylesheets/vendor/slidebars.min.css" rel="stylesheet" media="screen">
-
-  <!-- Revolution Slider Plugin -->
-  <link href="stylesheets/vendor/layers.css" rel="stylesheet" media="screen">
-  <link href="stylesheets/vendor/settings.css" rel="stylesheet" media="screen">
-  <link href="stylesheets/vendor/navigation.css" rel="stylesheet" media="screen">
-
-  <!-- All Theme Styles -->
-  <link href="stylesheets/theme.min.css" rel="stylesheet" media="screen">
-
-  <!--Modernizr / Detectizr-->
-  <script src="js/vendor/modernizr.custom.js"></script>
-  <script src="js/vendor/detectizr.min.js"></script>
 
 </head>
 
 <!-- Body -->
-<body class="is-preloader preloading">
-  <div id="preloader" data-spinner="spinner2" data-screenbg="#fff"></div>
-
+<body>
   <div class="page-wrapper">
-
     <div class="modal fade" id="quickPreview" tabindex="-1" role="dialog">
       <div class="modal-dialog">
         <button type="button" class="close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -169,324 +170,32 @@
 
       <div class="widget search margin-bottom-none">
         <i class="icon material-icons search"></i>
+        <form name="search" method="post" action="<?php echo base_url(); ?>product/search">
+                  <input type="text" name="keyword" value="<?php if($this->session->userdata('keyword')){ echo $this->session->userdata('keyword'); } ?>" placeholder="Search entire store here..." class="form-control input-sm">
+                    <!-- <input type="image" class="" src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/search-btn.png"> -->
+                </form>
         <input type="text" class="form-control input-sm" placeholder="Search Shop">
       </div>
 
       <nav class="offcanvas-navigation" role="navigation" data-back-btn-text="Back">
         <div class="menu-site-menu-container">
           <ul class="menu">
-            <li class="menu-item menu-item-has-children current">
-              <a href="#">Home</a>
-
-              <ul class="sub-menu">
-                <li class="menu-item current">
-                  <a href="index.html">Hero Slider</a>
-                </li>
-                <li class="menu-item">
-                  <a href="home-category-tiles.html">Category</a>
-                </li>
-                <li class="menu-item">
-                  <a href="home-featured-products.html">Feature</a>
-                </li>
-                <li class="menu-item">
-                  <a href="home-week-deals.html">Deals of the Week</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-item menu-item-has-children">
-              <a href="#">Shop</a>
-
-              <ul class="sub-menu">
-                <li class="menu-item-has-children">
-                  <a href="#">Shop Pages</a>
-
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="shop-grid-3cols-sl.html">Grid 3 Cols Sidebar Left</a>
-                    </li>
-                    <li>
-                      <a href="shop-grid-2cols-sl.html">Grid 2 Cols Sidebar Left</a>
-                    </li>
-                    <li>
-                      <a href="shop-grid-3cols-sr.html">Grid 3 Cols Sidebar Right</a>
-                    </li>
-                    <li>
-                      <a href="shop-grid-2cols-sr.html">Grid 2 Cols Sidebar Right</a>
-                    </li>
-                    <li>
-                      <a href="shop-grid-4cols-ns.html">Grid 4 Cols No Sidebar</a>
-                    </li>
-                    <li>
-                      <a href="shop-grid-3cols-ns.html">Grid 3 Cols No Sidebar</a>
-                    </li>
-                    <li>
-                      <a href="shop-grid-2cols-ns.html">Grid 2 Cols No Sidebar</a>
-                    </li>
-                    <li>
-                      <a href="shop-list-sl.html">List Sidebar Left</a>
-                    </li>
-                    <li>
-                      <a href="shop-list-sr.html">List Sidebar Right</a>
-                    </li>
-                    <li>
-                      <a href="shop-list-ns.html">List No Sidebar</a>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="menu-item-has-children">
-                  <a href="#">Categories</a>
-
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="shop-cat-4cols.html">Grid 4 Columns</a>
-                    </li>
-                    <li>
-                      <a href="shop-cat-3cols.html">Grid 3 Columns</a>
-                    </li>
-                    <li>
-                      <a href="shop-cat-2cols.html">Grid 2 Columns</a>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="menu-item-has-children">
-                  <a href="#">Product Pages</a>
-
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="product-gallery-left.html">Product Gallery Left</a>
-                    </li>
-                    <li>
-                      <a href="product-gallery-right.html">Product Gallery Right</a>
-                    </li>
-                    <li>
-                      <a href="product-grouped.html">Product Grouped</a>
-                    </li>
-                    <li>
-                      <a href="product-affiliate.html">Product Affiliate</a>
-                    </li>
-                    <li>
-                      <a href="product-out-stock.html">Product Out of Stock</a>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="menu-item-has-children">
-                  <a href="#">Orders</a>
-
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="shopping-cart.html">Shopping Cart</a>
-                    </li>
-                    <li>
-                      <a href="checkout-simple.html">Checkout Simple</a>
-                    </li>
-                    <li>
-                      <a href="checkout-wizard.html">Checkout Steps Wizard</a>
-                    </li>
-                  </ul>
-                </li>
-
-                <li>
-                  <a href="products-compare.html">Products Comparison</a>
-                </li>
-
-                <li class="menu-item-has-children">
-                  <a href="#">Account</a>
-
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="account-login.html">Log In / Sign Up</a>
-                    </li>
-                    <li>
-                      <a href="account-wishlist.html">Wishlist</a>
-                    </li>
-                    <li>
-                      <a href="account-order-track.html">Track your Order</a>
-                    </li>
-                    <li>
-                      <a href="account-orders-list.html">Orders List</a>
-                    </li>
-                    <li>
-                      <a href="account-order-info.html">Order Information</a>
-                    </li>
-                    <li>
-                      <a href="account-user-info.html">User Information</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-item-has-children">
-              <a href="#">Blog</a>
-
-              <ul class="sub-menu">
-                <li>
-                  <a href="blog-grid.html">Grid View</a>
-                </li>
-                <li>
-                  <a href="blog-single.html">Single Post</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-item-has-children">
-              <a href="#">Gallery</a>
-
-              <ul class="sub-menu">
-                <li>
-                  <a href="gallery-masonry.html">Masonry Grid</a>
-                </li>
-                <li>
-                  <a href="gallery-4cols.html">Grid 4 Columns</a>
-                </li>
-                <li>
-                  <a href="gallery-3cols.html">Grid 3 Columns</a>
-                </li>
-                <li>
-                  <a href="gallery-2cols.html">Grid 2 Columns</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-item-has-children">
-              <a href="#">Pages</a>
-
-              <ul class="sub-menu">
-                <li>
-                  <a href="page-about.html">About Us</a>
-                </li>
-                <li>
-                  <a href="page-faq.html">FAQ</a>
-                </li>
-                <li>
-                  <a href="page-store-locator.html">Store Locator</a>
-                </li>
-                <li>
-                  <a href="page-404.html">404</a>
-                </li>
-              </ul>
-            </li>
-
             <li>
-              <a href="elements.html">Elements</a>
+              <a href="<?= $this->config->item('site_url'); ?>" title="Home">Home</a>
             </li>
-
-            <li class="divider"></li>
-
-            <li class="menu-item-has-children">
-                <a href="#">Men</a>
-
-              <ul class="sub-menu">
-                <li class="title">Outerwear</li>
-                <li><a href="#">Running</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Training</a></li>
-                <li><a href="#">Walking</a></li>
-                <li><a href="#">Baseball</a></li>
-                <li><a href="#">Hiking &amp; Trail</a></li>
-                <li><a href="#">Soccer</a></li>
-                <li><a href="#">Tennis</a></li>
-
-                <li class="divider"></li>
-
-                <li class="title">Clothing</li>
-                <li><a href="#">Short Sleeve &amp; Sleeveless Shirts</a></li>
-                <li><a href="#">Long Sleeve Shirts</a></li>
-                <li><a href="#">Jackets &amp; Hoodies</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Socks</a></li>
-                <li><a href="#">Accessories and Gear</a></li>
-                <li><a href="#">Recently Reduced Clothing</a></li>
-              </ul>
-            </li>
-
-            <li class="menu-item-has-children">
-
-              <a href="#">Women</a>
-
-              <ul class="sub-menu">
-                <li class="title">Outerwear</li>
-                <li><a href="#">Running</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Training</a></li>
-                <li><a href="#">Walking</a></li>
-                <li><a href="#">Baseball</a></li>
-                <li><a href="#">Hiking &amp; Trail</a></li>
-                <li><a href="#">Soccer</a></li>
-                <li><a href="#">Tennis</a></li>
-
-                <li class="divider"></li>
-
-                <li class="title">Clothing</li>
-                <li><a href="#">Short Sleeve &amp; Sleeveless Shirts</a></li>
-                <li><a href="#">Long Sleeve Shirts</a></li>
-                <li><a href="#">Jackets &amp; Hoodies</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Socks</a></li>
-                <li><a href="#">Accessories and Gear</a></li>
-                <li><a href="#">Recently Reduced Clothing</a></li>
-              </ul>
-            </li>
-
-            <li class="menu-item-has-children">
-
-              <a href="#">Sales</a>
-
-              <ul class="sub-menu">
-                <li class="title">Outerwear</li>
-                <li><a href="#">Running</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Training</a></li>
-                <li><a href="#">Walking</a></li>
-                <li><a href="#">Baseball</a></li>
-                <li><a href="#">Hiking &amp; Trail</a></li>
-                <li><a href="#">Soccer</a></li>
-                <li><a href="#">Tennis</a></li>
-
-                <li class="divider"></li>
-
-                <li class="title">Clothing</li>
-                <li><a href="#">Short Sleeve &amp; Sleeveless Shirts</a></li>
-                <li><a href="#">Long Sleeve Shirts</a></li>
-                <li><a href="#">Jackets &amp; Hoodies</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Socks</a></li>
-                <li><a href="#">Accessories and Gear</a></li>
-                <li><a href="#">Recently Reduced Clothing</a></li>
-              </ul>
-            </li>
-
-            <li class="menu-item-has-children">
-
-              <a href="#">Shoes</a>
-
-              <ul class="sub-menu">
-                <li class="title">Outerwear</li>
-                <li><a href="#">Running</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Training</a></li>
-                <li><a href="#">Walking</a></li>
-                <li><a href="#">Baseball</a></li>
-                <li><a href="#">Hiking &amp; Trail</a></li>
-                <li><a href="#">Soccer</a></li>
-                <li><a href="#">Tennis</a></li>
-
-                <li class="divider"></li>
-
-                <li class="title">Clothing</li>
-                <li><a href="#">Short Sleeve &amp; Sleeveless Shirts</a></li>
-                <li><a href="#">Long Sleeve Shirts</a></li>
-                <li><a href="#">Jackets &amp; Hoodies</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Socks</a></li>
-                <li><a href="#">Accessories and Gear</a></li>
-                <li><a href="#">Recently Reduced Clothing</a></li>
-              </ul>
-            </li>
+            <?php foreach ($category as $header_category_detail) { ?>
+                    <li class="menu-item-has-children">
+                      <a href="#"><?=$header_category_detail[0]->category_title?></a>
+                      <ul class="sub-menu">
+                      <?php foreach ($header_category_detail as $header_sub_category) { ?>
+                        <li>
+                          <a href="blog-grid.html"><?= $header_sub_category->subcategory_title ?></a>
+                        </li>
+                      <?php } ?>
+                      </ul>
+                    </li>
+                  <?php } ?>
+                  <!-- Main Navigation Level -->
           </ul>
         </div>
       </nav>
@@ -495,7 +204,6 @@
     <div canvas="container">
       <!-- Backdrop for Canvas -->
       <div class="backdrop offcanvas-toggle"></div>
-
       <header class="header">
 
         <!-- Top Bar Section -->
@@ -515,41 +223,161 @@
               </div>
               <div class="col-sm-4 text-right">
                 <ul class="tools">
-                  <li class="dropdown">
-                    <a href="#">
-                      <i class="material-icons language"></i>
-                      <span class="hidden-md">Language</span>
-                    </a>
-
-                    <ul class="sub-menu">
-                      <li><a href="#">Russian</a></li>
-                      <li><a href="#">French</a></li>
-                      <li><a href="#">Mandarin</a></li>
-                      <li><a href="#">Italian</a></li>
-                      <li><a href="#">Gorgean</a></li>
-                    </ul>
-                  </li>
-
                   <li>
                     <a href="#">
                       <i class="material-icons person"></i>
                       <span class="hidden-md">My Account</span>
                     </a>
                   </li>
-
-                  <li class="dropdown">
-                    <a href="#">
-                      <span>$</span>
-                      <span class="hidden-md">Currency</span>
-                    </a>
-
-                    <ul class="sub-menu">
-                      <li><a href="#">USD</a></li>
-                      <li><a href="#">EUR</a></li>
-                    </ul>
-                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </div><!-- Top Bar Section END -->
+        
+
+        <!-- Navbar Section -->
+        <div class="navbar">
+          <div class="container">
+            <div class="navbar-inner">
+              <div class="column">
+                <!-- Main Navigation -->
+                <ul class="main-nav">
+                  <!-- Main Navigation Level -->
+                  <li class="nav-item lvl-1 current">
+                    <a href="<?= $this->config->item('site_url'); ?>" title="Home">Home</a>
+                  </li><!-- Main Navigation Level END -->
+
+                  <?php foreach ($category as $header_category_detail) { ?>
+                    <li class="nav-item dropdown lvl-1">
+                      <a href="#"><?=$header_category_detail[0]->category_title?></a>
+                      <ul class="sub-menu">
+                      <?php foreach ($header_category_detail as $header_sub_category) { ?>
+                        <li class="nav-item lvl-2">
+                          <a href="blog-grid.html"><?=$header_sub_category->subcategory_title ?></a>
+                        </li>
+                      <?php } ?>
+                      </ul>
+                    </li>
+                  <?php } ?>
+                  <!-- Main Navigation Level -->
+                </ul>
+              </div> 
+              <div class="column text-center">
+                <!-- Main Logo -->
+                <a href="index.html" class="logo">
+                  <img src="img/logo.png" alt="">
+                </a><!-- Main Logo END -->
+              </div>
+
+              <!-- Header Tools -->
+              <div class="column">
+                <div class="header-tools text-right">
+                  <div class="widget search">
+                    <i class="icon material-icons search"></i>
+                    <input type="text" class="form-control input-sm" placeholder="Search Shop">
+                  </div>
+
+                  <a href="account-wishlist.html" class="header-tools-link wishlist">
+                    <i class="material-icons favorite"></i>
+                  </a>
+
+                  <!-- Cart dropdown element -->
+                  <div class="cart-container dropdown">
+                    <a href="#" class="header-tools-link cart-link">
+                      <i class="material-icons shopping_cart"></i>
+                      <span class="counter">24</span>
+                    </a>
+
+                    <div class="sub-menu">
+                      <div class="widget cart-widget">
+                        <div class="widget-title">
+                          Latest Products
+                        </div>
+
+                        <ul class="cart-list">
+                          <!-- Cart List Item -->
+                          <li>
+                            <a href="product-gallery-left.html" class="cart-thumb">
+                              <img src="img/shop/cart-widget/01.jpg" alt="">
+                            </a>
+
+                            <div class="info-cont">
+                              <a href="product-gallery-left.html" class="item-title">SUEDE-EFFECT JACKET</a>
+
+                              <div class="category">
+                                Skirts
+
+                                <span class="cost">$ 140</span>
+                              </div>
+                            </div>
+                          </li><!-- Cart List Item END -->
+
+                          <!-- Cart List Item -->
+                          <li>
+                            <a href="product-gallery-left.html" class="cart-thumb">
+                              <img src="img/shop/cart-widget/02.jpg" alt="">
+                            </a>
+
+                            <div class="info-cont">
+                              <a href="product-gallery-left.html" class="item-title">SUEDE-EFFECT JACKET</a>
+
+                              <div class="category">
+                                Skirts
+
+                                <span class="cost">$140</span>
+                              </div>
+                            </div>
+                          </li><!-- Cart List Item END -->
+
+                          <!-- Cart Total -->
+                          <li>
+                            <div class="total">
+                              Total
+
+                              <div class="cost">$80 0000</div>
+                            </div>
+                          </li><!-- Cart Total END -->
+                        </ul>
+
+                        <a href="shopping-cart.html" class="btn btn-default btn-block margin-right-none">Go to cart</a>
+                        <a href="checkout-wizard.html" class="btn btn-default btn-block margin-right-none">Poceed to checkout</a>
+                      </div>
+                    </div>
+                  </div><!-- Cart dropdown element END -->
+                </div>
+              </div><!-- Header Tools END -->
+            </div>
+          </div>
+        </div><!-- Navbar Section END -->
+
+        <!-- Mobile Tools -->
+        <div class="mobile-view">
+          <div class="container">
+            <!-- OffCanvas Toggle -->
+            <a href="#" class="offcanvas-toggle">
+              <i class="material-icons menu"></i>
+            </a>
+
+            <!-- Mobile View Logo -->
+            <a href="index.html" class="logo">
+              <img src="img/logo.png" alt="">
+            </a>
+
+            <div class="mobile-tools">
+              <!-- Wishlist Link -->
+              <a href="account-wishlist.html" class="wishlist">
+                <i class="material-icons favorite"></i>
+              </a>
+
+              <!-- Cart dropdown element -->
+              <div class="cart-container">
+                <a href="shopping-cart.html" class="cart-link">
+                  <i class="material-icons shopping_cart"></i>
+                  <span class="counter">24</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>

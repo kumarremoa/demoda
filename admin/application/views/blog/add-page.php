@@ -6,17 +6,17 @@
 <script type="text/javascript">
 $r = $.noConflict();
 $r(document).ready(
-	function()
-	{
-		$r('#redactor').redactor();
-	}
+    function()
+    {
+        $r('#redactor').redactor();
+    }
 );
 </script>
  <!-- main content -->
-	
+    
 <div id="contentwrapper">
     <div class="main_content">                   
-		<nav>
+        <nav>
             <div id="jCrumbs" class="breadCrumb module">
                 <ul>
                     <li>
@@ -31,56 +31,63 @@ $r(document).ready(
                 </ul>
             </div>
         </nav>
-		
-		<div class="row-fluid">
-			<div class="span12">
-			
-			<?php if($this->session->userdata('msg')!='') {  
-				echo '<div class="alert alert-info">';
-				echo $this->session->userdata('msg'); $this->session->unset_userdata('msg');
-				echo '</div>';
-			 } ?>
-										
-				<?php
-					// create form
-					$attributes = array('class' => 'form-horizontal well', 'id' => 'addPageForm');
-					echo form_open('blog/saveBlog', $attributes);
-				?>
-				
-				<div class="heading clearfix">
-					<h3 class="pull-left">Add Blog</h3>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">Blog Title</label>
-					<div class="controls">
-					<input type="text" name="article_title" value="" required />													
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">Title</label>
-					<div class="controls">
-					<input type="text" name="page_title" value="" required />													
-					</div>
-				</div>
-								
-				<div class="control-group">
-					<label class="control-label">Content</label>
-					<div class="controls">
-					<textarea name="content" id="redactor" cols="500" rows="10"></textarea>									
-					</div>
-				</div>
-                					
-				<button class="btn" type="submit">Add</button>
-				
-				</form>
-			</div>						
-		</div>
-		
+        
+        <div class="row-fluid">
+            <div class="span12">
+            
+            <?php if($this->session->userdata('msg')!='') {  
+                echo '<div class="alert alert-info">';
+                echo $this->session->userdata('msg'); $this->session->unset_userdata('msg');
+                echo '</div>';
+             } ?>
+                                        
+                <?php
+                    // create form
+                    $attributes = array('class' => 'form-horizontal well', 'id' => 'addBlogForm', 'enctype'=> "multipart/form-data");
+                    echo form_open('blog/saveBlog', $attributes);
+                ?>
+                
+                <div class="heading clearfix">
+                    <h3 class="pull-left">Add Blog</h3>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Blog Title</label>
+                    <div class="controls">
+                    <input type="text" name="article_title" value="" required />                                                    
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Author</label>
+                    <div class="controls">
+                    <input type="text" name="author_name" value="" required />                                                  
+                    </div>
+                </div>
+                                
+                <div class="control-group">
+                    <label class="control-label">Content</label>
+                    <div class="controls">
+                    <textarea name="content" id="redactor" cols="500" rows="10"></textarea>                                 
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Cover Image<span class="f_req">*</span></label>
+                    <div data-fileupload="file" class="controls fileupload fileupload-new">
+                        <input type="file" name="image_path" required="required" />
+                    </div>                          
+                </div>
+                                    
+                <button class="btn" type="submit">Add</button>
+                
+                </form>
+            </div>                      
+        </div>
+        
     </div>
 </div>
-			
-			
-						
+            
+            
+                        
           

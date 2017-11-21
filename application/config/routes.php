@@ -40,7 +40,7 @@
 
 $route = [
 	'default_controller' => "home",
-	'404_override' => '',
+	'404_override' => 'error/four-o-four',
 	'about-us' => "home/page/1",
 	'shipping-rates' => "home/page/2",
 	'return-policy' => "home/page/3",
@@ -50,6 +50,7 @@ $route = [
 	'press-room' => "home/page/7",
 	'help' => "home/page/8",
 	'terms-conditions' => "home/page/9",
+	'blog/index' => "blog/index",
 ];
 
 /* End of file routes.php */

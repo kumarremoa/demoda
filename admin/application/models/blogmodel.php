@@ -12,7 +12,7 @@ class Blogmodel extends CI_Model {
 	 */
 	public function listAllBlog()
 	{
-		$this->db->select('id,article_title,content');
+		$this->db->select('id,article_title,author_name,content');
 		
 		$recordSet = $this->db->get('articles');
 		
@@ -27,15 +27,10 @@ class Blogmodel extends CI_Model {
 	/**
 	 * This function is to save/create new static page
 	 */
-	public function addArticle($formData, $imageData)
+	public function addArticle($formData, $imageData = '')
 	{
-		$str = trim($formData['article_title']);
-        $str = preg_replace("/[^a-zA-Z0-9 ]/", "", $str);
-        $str = preg_replace('!\s+!', '-', $str);
-        $str = trim($str, '-');
-		$formData['link_rewrite'] = $str;
 		$formData['image_path'] = $this->addImage($imageData);
-				
+		// echo"<pre>";print_r($formData);die;
 		$this->db->insert('articles',$formData);
 	}
 	
@@ -85,14 +80,14 @@ class Blogmodel extends CI_Model {
 
 	public function addImage($imageData = [])
 	{
-		if($imageData['image']['name'][0] != ''){
+		if($imageData['image_path']['name'][0] != ''){
 			for($i=0; $i<sizeof($imageData['image']['name']); $i++)
 			{
 				$random_digit=rand(0000,9999);
 				$file_name=$random_digit.$imageData['image']['name'][$i];
 				$file_name = str_replace(" ","_",$file_name);
 				// The file supplied is valid...Set up some variables for the location and name of the file.
-				$thumb_folder = 'uploads/products/large/'; // This is the folder to which the images will be saved
+				$thumb_folder = 'uploads/articles/large/'; // This is the folder to which the images will be saved
 				$tmp_file = $thumb_folder.$file_name; // save file in tmp folder
 				// Now use the move_uploaded_file function to move the file from its temporary location to its new location as defined above.
 				move_uploaded_file($_FILES['image']['tmp_name'][$i], $tmp_file);
@@ -134,10 +129,16 @@ class Blogmodel extends CI_Model {
 
 	}
 
-	public function createBlog($formData)
+	public function createBlog($formData, $imageData)
 	{
 		unset($formData['id']);
-		$this->db->insert('static_pages',$formData);
+		$str = trim($formData['article_title']);
+        $str = preg_replace("/[^a-zA-Z0-9 ]/", "", $str);
+        $str = preg_replace('!\s+!', '-', $str);
+        $str = trim($str, '-');
+		$formData['link_rewrite'] = $str;
+		$formData['image_path'] = $this->addImage($imageData);
+		$this->db->insert('articles',$formData);
 	}
 	
 }

@@ -6,94 +6,8 @@
 				<div class="antiScroll">
 					<div class="antiscroll-inner">
 						<div class="antiscroll-content">
-					
 							<div class="sidebar_inner">
 								<div id="side_accordion" class="accordion">
-									
-									<!--<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<i class="icon-folder-close"></i> Content
-											</a>
-										</div>
-										<div class="accordion-body collapse" id="collapseOne">
-											<div class="accordion-inner">
-												<ul class="nav nav-list">
-													<li><a href="javascript:void(0)">Articles</a></li>
-													<li><a href="javascript:void(0)">News</a></li>
-													<li><a href="javascript:void(0)">Newsletters</a></li>
-													<li><a href="javascript:void(0)">Comments</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<i class="icon-th"></i> Modules
-											</a>
-										</div>
-										<div class="accordion-body collapse" id="collapseTwo">
-											<div class="accordion-inner">
-												<ul class="nav nav-list">
-													<li><a href="javascript:void(0)">Content blocks</a></li>
-													<li><a href="javascript:void(0)">Tags</a></li>
-													<li><a href="javascript:void(0)">Blog</a></li>
-													<li><a href="javascript:void(0)">FAQ</a></li>
-													<li><a href="javascript:void(0)">Formbuilder</a></li>
-													<li><a href="javascript:void(0)">Location</a></li>
-													<li><a href="javascript:void(0)">Profiles</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>-->
-									<!--<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="#collapseThree" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<i class="icon-user"></i> Account manager
-											</a>
-										</div>
-										<div class="accordion-body collapse" id="collapseThree">
-											<div class="accordion-inner">
-												<ul class="nav nav-list">
-													<li><a href="javascript:void(0)">Members</a></li>
-													<li><a href="javascript:void(0)">Members groups</a></li>
-													<li><a href="javascript:void(0)">Users</a></li>
-													<li><a href="javascript:void(0)">Users groups</a></li>
-												</ul>
-												
-											</div>
-										</div>
-									</div>-->
-									<!--<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="#collapseFour" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<i class="icon-cog"></i> Configuration
-											</a>
-										</div>
-										<div class="accordion-body collapse" id="collapseFour">
-											<div class="accordion-inner">
-												<ul class="nav nav-list">
-													<li class="nav-header">People</li>
-													<li class="active"><a href="javascript:void(0)">Account Settings</a></li>
-													<li><a href="javascript:void(0)">IP Adress Blocking</a></li>
-													<li class="nav-header">System</li>
-													<li><a href="javascript:void(0)">Site information</a></li>
-													<li><a href="javascript:void(0)">Actions</a></li>
-													<li><a href="javascript:void(0)">Cron</a></li>
-													<li class="divider"></li>
-													<li><a href="javascript:void(0)">Help</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>-->
-									
-									<!--<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="javascript:void(0);" class="accordion-toggle" onclick="window.open('<?php echo base_url(); ?>Banner/','_top');"><i class="icon-cog"></i> Banner Images</a>
-										</div>																		
-									</div>	-->	
-									
 									<div class="accordion-group">
 										<div class="accordion-heading">
 											<a href="#collapseFive" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
@@ -190,31 +104,12 @@
 											<div class="accordion-inner">
 												<ul class="nav nav-list">
 													<li><a href="javascript:void(0)" onclick="window.open('<?php echo base_url(); ?>orders/listOrders','_top');">List</a></li>
-                                                    <li><a href="javascript:void(0)" onclick="javascript:void(0);">Orders from Amazon</a></li>
-                                                    <li><a href="javascript:void(0)" onclick="javascript:void(0);">Orders from eBay</a></li>
                                                     <li><a href="javascript:void(0)" onclick="window.open('<?php echo base_url(); ?>orders/traceOrder','_top');">Trace Order/ Shipping info</a></li>
 												</ul>
 												
 											</div>
 										</div>
 									</div>
-                                    
-                                    <!--<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="#collapseNine" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<i class="icon-user"></i> Newsletter Subscribers
-											</a>
-										</div>
-										<div class="accordion-body collapse" id="collapseNine">
-											<div class="accordion-inner">
-												<ul class="nav nav-list">
-													<li><a href="javascript:void(0)" onclick="window.open('<?php echo base_url(); ?>newsletters/subscribers','_top');">List</a></li>
-												</ul>
-												
-											</div>
-										</div>
-									</div>-->
-                                    
                                     <div class="accordion-group">
 										<div class="accordion-heading">
 											<a href="#collapseTen" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
@@ -265,18 +160,8 @@
 											</div>
 										</div>
 									</div>
-									
-									<!--<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="javascript:void(0);" class="accordion-toggle" onclick="window.open('<?php echo base_url(); ?>Featured/addCategory','_top');"><i class="icon-cog"></i> </a>
-										</div>																		
-									</div>		-->															
-																								
 								</div>
-								
-								
-								
-								
+
 								<div class="push"></div>
 							</div>
 							   
