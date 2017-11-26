@@ -42,7 +42,7 @@ $route = [
 	'home' => 'home/index',
 	'user/(:any)/(:num)' => 'home/user/$1/$2',//for routing url
 
-	// 'default_controller' => "home",
+	'default_controller' => "home",
 	// '404_override' => 'error/four-o-four',
 	// 'about-us' => "home/page/1",
 	// 'shipping-rates' => "home/page/2",

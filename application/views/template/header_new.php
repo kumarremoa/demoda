@@ -196,6 +196,12 @@ $this->load->view('template/appAsset');
                     </li>
                   <?php } ?>
                   <!-- Main Navigation Level -->
+            <li>
+              <a href="<?= $this->config->item('site_url'); ?>" title="SALE">SALE</a>
+            </li>
+            <li>
+              <a href="<?= $this->config->item('site_url'); ?>" title="BLOG">BLOG</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -214,12 +220,9 @@ $this->load->view('template/appAsset');
                 <span class="text-primary">Demoda Secrets | Sleep in style <i class="material-icons info_outline"></i></span>
               </div>
               <div class="col-sm-4 text-center">
-                <a href="#" class="social socicon-instagram"></a>
-                <a href="#" class="social socicon-facebook"></a>
-                <a href="#" class="social socicon-pinterest"></a>
-                <a href="#" class="social socicon-instagram"></a>
-                <a href="#" class="social socicon-youtube"></a>
-                <a href="#" class="social socicon-dribbble"></a>
+                <a href="https://www.instagram.com/demodasecrets/" class="social socicon-instagram"></a>
+                <a href="https://www.facebook.com/demodasecrets/" class="social socicon-facebook"></a>
+                <a href="https://twitter.com/demodasecrets" class="social socicon-twitter"></a>
               </div>
               <div class="col-sm-4 text-right">
                 <ul class="tools">
@@ -261,6 +264,12 @@ $this->load->view('template/appAsset');
                     </li>
                   <?php } ?>
                   <!-- Main Navigation Level -->
+                  <li class="nav-item lvl-1">
+                    <a href="<?= $this->config->item('site_url'); ?>" title="Blog">Blog</a>
+                  </li><!-- Main Navigation Level END -->
+                  <!-- <li class="nav-item lvl-1 current">
+                    <a href="<?= $this->config->item('site_url'); ?>" title="SALE">SALE</a>
+                  </li> --><!-- Main Navigation Level END -->
                 </ul>
               </div> 
               <div class="column text-center">

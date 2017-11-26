@@ -57,6 +57,7 @@ class Home extends CI_Controller {
 		$data['seoData']  = $this->getSeoHomeComponents();
 		
 		// load home.php
+		// $this->load->view('home/index.html');
 		$this->load->view('template/header_new',$data);
 		//$this->load->view('home/home',$data);
 		$this->load->view('template/footer_new');
@@ -85,7 +86,7 @@ class Home extends CI_Controller {
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
-				
+		
 		$this->load->view('template/header',$data);
 		$this->load->view('home/static-page',$data);
 		$this->load->view('template/footer');

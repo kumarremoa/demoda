@@ -49,12 +49,10 @@
     <!-- Categories Filter -->
     <div class="widget">
       <div class="widget-title">
-        Get more with B-Shop
+        ABOUT DEMODA
       </div>
-
-      <a href="#" class="market-btn btn-appstore" style="background-image: url(img/market-btns/appstore.png);"><span>Download on the</span>App Store</a>
-
-      <a href="#" class="market-btn btn-playstore" style="background-image: url(img/market-btns/playstore.png);"><span>Download it from</span>Play Store</a>
+      De’Moda – Combine style with comfort!<br><br>
+      De’Moda is a luxury nightwear brand that provides some of the finest nightwear to women at an affordable price!
     </div><!-- Categories Filter END -->
   </div>
 
@@ -65,11 +63,15 @@
         Stay in touch
       </div>
 
-      <a href="https://www.instagram.com/demodasecrets/" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
-      <a href="https://www.facebook.com/demodasecrets/" class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
-      <a href="https://twitter.com/demodasecrets" class="btn btn-gray btn-iconed"><i class="socicon-twitter"></i></a>
-      <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-youtube"></i></a>
+      <a href="https://www.instagram.com/demodasecrets/" target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
+      <a href="https://www.facebook.com/demodasecrets/" target="_blank"  class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
+      <a href="https://twitter.com/demodasecrets"  target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-twitter"></i></a>
+      <a href="#" target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-pinterest"></i></a>
     </div><!-- Categories Filter END -->
+    <div class="widget">
+      Need help? Reach Customer Service </br>
+      or Call Us +91-959-440-8888 
+    </div>
   </div>
 </div>
 </div>
@@ -82,7 +84,7 @@
 
   <div class="column">
     <div class="cards">
-      <img src="img/cards.png" alt="Credit Cards">
+      <img src="<?= $this->config->item('css_images_js_base_url').'images/footer.png'; ?>" alt="Credit Cards">
     </div>
   </div><!-- .column -->
 </div>
