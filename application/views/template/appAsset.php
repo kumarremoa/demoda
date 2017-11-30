@@ -17,10 +17,24 @@ $_custom_css  = [
 		"css/vendor/navigation.css",
 		"css/theme.min.css",
 	],
+	"product" => [
+		"css/vendor/socicon.min.css",
+		"css/vendor/material-icons.min.css",
+		"css/vendor/bootstrap.min.css",
+		"css/vendor/slick.css",
+		"css/vendor/magnific-popup.css",
+		//"css/vendor/slidebars.min.css",
+		"css/theme.min.css",
+	],
+
 ];
 
 $_custom_js = [
 	"home" => [
+		"js/vendor/modernizr.custom.js",
+		"js/vendor/detectizr.min.js",
+	],
+	"product" => [
 		"js/vendor/modernizr.custom.js",
 		"js/vendor/detectizr.min.js",
 	]

@@ -254,6 +254,112 @@ $(document).ready(function($){
 				{
 			?>
             <div class="row">
+                <div class="col-sm-12">
+                    <section class="fw-section margin-bottom-1x">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-7">
+                            <div class="single-slider">
+                              <div class="thumbnail-carousel" data-slick='{"dots": false,"vertical": true, "arrows": false}'>
+                                <a href="#img01"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-01.jpg" alt="Thumb"></a>
+                                <a href="#img02"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-02.jpg" alt="Thumb"></a>
+                                <a href="#img03"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-03.jpg" alt="Thumb"></a>
+                                <a href="#img04"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-04.jpg" alt="Thumb"></a>
+                                <a href="#img05"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-02.jpg" alt="Thumb"></a>
+                                <a href="#img06"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-05.jpg" alt="Thumb"></a>
+                              </div>
+
+                              <div class="image-preview1" data-slick='{"dots": true, "arrows": false, "swipe": true}'>
+                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/01.jpg" alt="Thumb">
+                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/02.jpg" alt="Thumb">
+                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/03.jpg" alt="Thumb">
+                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/04.jpg" alt="Thumb">
+                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/02.jpg" alt="Thumb">
+                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/05.jpg" alt="Thumb">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="single-item-info">
+                              <div class="item-logo">
+                                <img src="<?= $this->config->item('site_url') ?>img/single-item-logo.png" alt="">
+                              </div>
+                              <div class="item-title">
+                                OVERSIZED DRESS
+                              </div>
+                              <div class="item-sku">
+                                Product Sku: 5110336
+                              </div>
+                              <div class="item-rating">
+                                <img src="<?= $this->config->item('site_url') ?>img/rating.png" alt="">
+                                <span> (12 reviews)</span>
+                              </div>
+                              <div class="bages">
+                                <span class="bage">Sale 50%</span>
+                                <span class="bage bage-primary">New</span>
+                              </div>
+                              <div class="item-info">
+                                Eternity bands are a classy and stylish innovation to storm the market. These are often gifted for a marriage anniversary or at the time of giving birth to a child.
+                              </div>
+                              <div class="radio-group color">
+                                <div class="title">Choose Color</div>
+                                <span class="selected" style="background-color: #cabeae;"></span>
+                                <span style="background-color: #90b1db;"></span>
+                                <span style="background-color: #000;"></span>
+                              </div>
+                              <div class="radio-group size">
+                                <div class="title">Choose Size</div>
+                                <span>XXL</span>
+                                <span class="selected">XL</span>
+                                <span>L</span>
+                              </div>
+                              <div class="cost">
+                                $250 <span>$280</span>
+                              </div>
+                              <div class="action-tools">
+                                <div class="select inline">
+                                  <select name="select">
+                                  <?php if ($product->quantity > 0) {
+                                      for ($i=0; $i < $product->quantity; $i++) { ?>
+                                          <option><?= $i ?></option>
+                                    <?php  }
+                                  } ?>
+                                  </select>
+                                </div>
+
+                                <a href="#" class="btn btn-gray right-icon margin-bottom-none">Add To Cart <i class="material-icons shopping_cart"></i></a>
+
+                                <a href="#" class="btn btn-gray btn-iconed margin-bottom-none"><i class="material-icons favorite_border"></i></a>
+                                <a href="#" class="btn btn-gray btn-iconed margin-bottom-none"><i class="material-icons compare_arrows"></i></a>
+                              </div>
+                              <div class="category">Woman / Bodysuit</div>
+
+                              <!-- Popular Tags -->
+                              <div class="widget tags-list-widget">
+                                <div class="tags-list">
+                                  <a href="#">Clothes</a>
+                                  <a href="#">Boots</a>
+                                  <a href="#">Skirts</a>
+                                </div>
+                              </div><!-- Popular Tags END -->
+
+                              <div class="social">
+                                <div class="title">Share product</div>
+
+                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
+                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
+                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-pinterest"></i></a>
+                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-youtube"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
             	<div class="col-sm-12">
                 	<div class="prodct_section">
                     	<div class="product-row">
