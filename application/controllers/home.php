@@ -98,6 +98,7 @@ class Home extends CI_Controller {
 			'title' => 'Demoda Secrets | Nightwear, Mothercare & Ethnic Wear',
 			'description' => 'Get widest collection of quality nighty, mothercare & ethnic wear at Demoda. Shop online for Sleepshirts, Nighties, Kurtis, Nightgowns & more.'
 			];
+			return $seoData;
 	}
 	
 }

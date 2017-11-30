@@ -23,9 +23,12 @@
 					
 					$id = $category_details[0]->id;
 					$title = $category_details[0]->title;
+					$cat_link_rewrite = $category_details[0]->cat_link_rewrite;
 					//$thumb_image = $this->config->item('site_url').'uploads/featured_categories/'.$category_details[0]->thumb_image;
 					//$banner_image = $this->config->item('site_url').'uploads/featured_categories/'.$category_details[0]->banner_image;
 					$is_active = $category_details[0]->active;
+					$seo_title = $category_details[0]->seo_title;
+					$seo_description = $category_details[0]->seo_description;
 	
 					?>
 					<nav>
@@ -65,19 +68,29 @@
 								</div>
 							</div>
 											
-							<!--<div class="control-group">
-								<label class="control-label">Thumbnail Image<span class="f_req">*</span></label>
-								<div data-fileupload="file" class="fileupload fileupload-new">
-									<input type="file" name="image[]" /> <img src="<?php echo $thumb_image; ?>" width="100" />
+							<div class="control-group">
+								<label class="control-label">Category Link Rewrite<span class="f_req">*</span></label>
+								<div class="controls">
+									<input type="text" name="cat_link_rewrite" value="<?php echo $cat_link_rewrite; ?>" required="required"  />
 															
 								</div>							
 							</div>
 							
 							<div class="control-group">
-								<label class="control-label">Banner Image<span class="f_req">*</span></label>
-								<div data-fileupload="file" class="fileupload fileupload-new"><input type="file" name="image[]" /> <img src="<?php echo $banner_image; ?>" width="100" />
-								</div>
-							</div>-->
+								<label class="control-label">SEO Title<span class="f_req">*</span></label>
+								<div class="controls">
+									<input type="text" name="seo_title" value="<?php echo $seo_title; ?>" required="required"  />
+															
+								</div>							
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">SEO Description<span class="f_req">*</span></label>
+								<div class="controls">
+									<input type="text" name="seo_description" value="<?php echo $seo_description; ?>" required="required"  />
+															
+								</div>							
+							</div>
 							
 								<div class="control-group">
 								<label class="control-label">Status<span class="f_req">*</span></label>
