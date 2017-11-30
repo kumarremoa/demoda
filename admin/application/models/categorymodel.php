@@ -105,6 +105,7 @@ class Categorymodel extends CI_Model {
 		$id = $formData['id'];
 		$data['title'] = $formData['title'];
 		$data['active'] = $formData['active'];
+		$data['cat_link_rewrite'] = $formData['cat_link_rewrite'];
 		/*
 		for($i=0; $i<sizeof($imageData['image']['name']); $i++)
 		{
@@ -175,6 +176,7 @@ class Categorymodel extends CI_Model {
 	function saveSubCategory($formData)
 	{
 		//print_r($formData); exit;
+		$formData['sub_cat_link_rewrite'] = trim(str_replace(' ', '-', strtolower(urldecode($formData['title']))));
 		$this->db->set($formData);
 		$this->db->insert('subcategories');
 	}
@@ -182,6 +184,7 @@ class Categorymodel extends CI_Model {
 	function updateSubCategory($sub_category_id,$sub_category_title)
 	{
 		$data['title'] = urldecode($sub_category_title);
+		$data['sub_cat_link_rewrite'] = trim(str_replace(' ', '-', strtolower(urldecode($sub_category_title))));
 		$this->db->where('id',$sub_category_id);
 		$this->db->update('subcategories',$data);	
 	}

@@ -198,6 +198,7 @@ class Product extends CI_Controller {
 		$start = ($page > 0) ? (($page-1)*$config['per_page']) : 0;
 		
 		$data['results'] = $this->Productmodel->product_by_category($category_id,$config['per_page'],$start); // paginated records
+		$priceRange = $this->minPriceByResult($data['results']);
 		
         $data['links'] = $this->pagination->create_links();
 		
@@ -218,6 +219,14 @@ class Product extends CI_Controller {
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
+
+		$params = [
+		'priceRange' => $priceRange,
+		'results' => $data['results'],
+		];
+
+		$data['seoData'] = $this->seomodel->getSeoData($params,'category','nightware');
+
 								
 		$this->load->view('template/header',$data);
 		$this->load->view('product/category-products',$data);
@@ -228,6 +237,19 @@ class Product extends CI_Controller {
 	{
 		$this->session->set_userdata('list_type',$_POST['list_type']);
 		redirect($_POST['redirect_uri']);
+	}
+
+	public function minPriceByResult($value)
+	{
+		$priceArray = [] ;
+		foreach ($value as $key => $value) {
+			$priceArray[] = $value->price;
+		}
+
+		return [
+			'min' => min($priceArray),
+			'max' => max($priceArray),
+		];
 	}
 	
 }
