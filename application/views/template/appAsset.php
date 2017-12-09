@@ -23,7 +23,7 @@ $_custom_css  = [
 		"css/vendor/bootstrap.min.css",
 		"css/vendor/slick.css",
 		"css/vendor/magnific-popup.css",
-		//"css/vendor/slidebars.min.css",
+		"css/vendor/slidebars.min.css",
 		"css/theme.min.css",
 	],
 
