@@ -240,7 +240,7 @@ $this->load->view('template/appAsset');
         
 
         <!-- Navbar Section -->
-        <div class="navbar">
+        <div class="navbar mega-menu-container">
           <div class="container">
             <div class="navbar-inner">
               <div class="column">

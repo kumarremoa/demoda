@@ -59,7 +59,7 @@ class Home extends CI_Controller {
 		// load home.php
 		// $this->load->view('home/index.html');
 		$this->load->view('template/header_new',$data);
-		//$this->load->view('home/home',$data);
+		$this->load->view('home/home',$data);
 		$this->load->view('template/footer_new');
 	}
 	
@@ -73,23 +73,27 @@ class Home extends CI_Controller {
 	// show static page
 	public function page($page_id)
 	{		
-		$data['pageData'] = $this->Homemodel->getStaticPageContent($page_id);
-
-		// show 404 error page if id does not exist in database
-		if(sizeof($data['pageData']) == 0)
+		try{
+			$data['pageData'] = $this->Homemodel->getStaticPageContent($page_id);
+			// show 404 error page if id does not exist in database
+			if(sizeof($data['pageData']) == 0)
+				show_404();
+			
+			// total ordered amount
+			$cart_details = $this->Usermodel->total_order_amount();		
+			$data['total_cart_items'] = $cart_details['total_cart_items'];
+			$data['total_amount'] = $cart_details['total_amount'];
+			
+			// categories & subcategories
+			$data['header_categories'] = $this->Productmodel->getAllCategories();
+			
+			$this->load->view('template/header_new',$data);
+			// $this->load->view('pages/size-n-fit',[]);
+			$this->load->view('home/static-page',$data);
+			$this->load->view('template/footer_new');
+		} catch(Exception $e){
 			show_404();
-		
-		// total ordered amount
-		$cart_details = $this->Usermodel->total_order_amount();		
-		$data['total_cart_items'] = $cart_details['total_cart_items'];
-		$data['total_amount'] = $cart_details['total_amount'];
-		
-		// categories & subcategories
-		$data['header_categories'] = $this->Productmodel->getAllCategories();
-		
-		$this->load->view('template/header',$data);
-		$this->load->view('home/static-page',$data);
-		$this->load->view('template/footer');
+		}
 	}
 
 	public function getSeoHomeComponents()

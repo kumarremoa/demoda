@@ -46,14 +46,16 @@ $route = [
 	'404_override' => 'error/four-o-four',
 	'about-us' => "home/page/1",
 	'shipping-rates' => "home/page/2",
-	'return-policy' => "home/page/3",
+	'return-policy' => "home/page/13",
 	'international-shipping-and-payment' => "home/page/4",
 	'faq' => "home/page/5",
 	'contact-us' => "home/page/6",
 	'press-room' => "home/page/7",
 	'help' => "home/page/8",
 	'terms-conditions' => "home/page/9",
+	'size-n-fit-guide' =>"home/page/12",
 	'blog' => "blog/index",
+
 ];
 
 /* End of file routes.php */

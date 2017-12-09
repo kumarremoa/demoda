@@ -31,10 +31,6 @@
             	<li><a href="<?php echo $this->config->item('site_url'); ?>">Home</a></li>
                 <li><a href="<?php echo base_url(); ?>about-us" <?php if($this->uri->segment(1) == 'about-us'){ echo 'class="active"'; } ?>>About Us</a></li>
                 <li><a href="<?php echo base_url(); ?>terms-conditions" <?php if($this->uri->segment(1) == 'terms-conditions'){ echo 'class="active"'; } ?>>Terms & Conditions</a></li>
-                <!--  <li><a href="#">Caftan</a></li>
-                <li><a href="#">Tunics</a></li>
-                <li><a href="#">Skirts</a></li>
-                <li><a href="#">Scarfs</a></li> -->
                <li><a href="#">Blog</a></li>
                 <li><a href="<?php echo base_url() ?>help" <?php if($this->uri->segment(1) == 'help'){ echo 'class="active"'; } ?>>Help</a></li>
                 <li><a href="<?php echo base_url() ?>contact-us" <?php if($this->uri->segment(1) == 'contact-us'){ echo 'class="active"'; } ?>>Contact Us</a></li>

@@ -32,8 +32,6 @@ class Product extends CI_Controller {
 	
 	public function addToCart()
 	{
-		//print_r($_POST); exit;
-		// add product to cart		
 		$this->Productmodel->addToCart($_POST);
 	
 		
@@ -164,6 +162,7 @@ class Product extends CI_Controller {
 	// list products by category
 	function category($category_id)
 	{	
+		// print_r($this);die;
 	
 		if(isset($_POST['short_by']) || isset($_POST['per_page']))
 		{
@@ -224,8 +223,8 @@ class Product extends CI_Controller {
 		'priceRange' => $priceRange,
 		'results' => $data['results'],
 		];
-
-		$data['seoData'] = $this->seomodel->getSeoData($params,'category','nightware');
+		$this->load->model('Seomodel');
+		$data['seoData'] = $this->Seomodel->getSeoData($params,'category','nightware');
 
 								
 		$this->load->view('template/header',$data);
