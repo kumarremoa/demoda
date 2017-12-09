@@ -10,10 +10,10 @@
 
       <ul class="cat-list">
         <li>
-          <a href="<?=base_url()?>" title="">Payment</a>
+          <a href="<?=base_url('about-us')?>" title="">About Us</a>
         </li>
         <li>
-          <a href="#" title="">Delivery</a>
+          <a href="<?=base_url('contact-us')?>" title="">Contact Us</a>
         </li>
         <li>
           <a href="#" title="">Returns &amp; Refund</a>
@@ -26,7 +26,32 @@
   </div>
 
   <div class="col-md-3 col-sm-6">
-    <!-- Latest Product List -->
+    <!-- Categories START  -->
+    <div class="widget categories-widget">
+      <div class="widget-title">
+        INFORMATION
+      </div>
+
+      <ul class="cat-list">
+        <li>
+          <a href="<?=base_url('return-policy')?>" title="">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="<?=base_url('terms-conditions')?>" title="">Terms &amp; Conditions</a>
+        </li>
+        <li>
+          <a href="<?=base_url('shipping-rates')?>" title="Shipping and Delivery" >Shipping &amp; Delivery</a>
+        </li>
+        <li>
+          <a href="<?=base_url('return-policy')?>" title="Returns and Refunds">Returns &amp; Refunds</a>
+        </li>
+         <li>
+          <a href="<?=base_url('size-n-fit-guide')?>" title="Size and Fit Guide">Size &amp; Fit Guide</a>
+        </li>
+      </ul>
+    </div><!-- Categories END -->
+  </div>
+  <!-- <div class="col-md-3 col-sm-6">
     <div class="widget service-list">
       <div class="widget-title">
         Customer Service
@@ -42,8 +67,8 @@
           <a href="#" class="btn btn-gray btn-iconed btn-lg"><i class="material-icons local_activity"></i></a>
         </li>
       </ul>
-    </div><!-- Latest Product List END -->
-  </div>
+    </div>
+  </div> -->
 
   <div class="col-md-3 col-sm-6">
     <!-- Categories Filter -->
@@ -63,10 +88,10 @@
         Stay in touch
       </div>
 
-      <a href="https://www.instagram.com/demodasecrets/" target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
-      <a href="https://www.facebook.com/demodasecrets/" target="_blank"  class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
-      <a href="https://twitter.com/demodasecrets"  target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-twitter"></i></a>
-      <a href="#" target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-pinterest"></i></a>
+      <a href="https://www.instagram.com/demodasecrets/" title="instagram" target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
+      <a href="https://www.facebook.com/demodasecrets/" title="facebook" target="_blank"  class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
+      <a href="https://twitter.com/demodasecrets" title="twitter" target="_blank" class="btn btn-gray btn-iconed"><i class="socicon-twitter"></i></a>
+      <a href="#" target="_blank" title="spinterest" class="btn btn-gray btn-iconed"><i class="socicon-pinterest"></i></a>
     </div><!-- Categories Filter END -->
     <div class="widget">
       Need help? Reach Customer Service </br>
@@ -79,7 +104,7 @@
 <div class="copyright">
 <div class="container">
   <div class="column">
-    <p>&copy; Demodasecrets <?=date('Y')?>.</p>
+    <p>&copy; Copyrights  | De'Moda-<?=date('Y')?> | All Rights Reserved.</p>
   </div><!-- .column -->
 
   <div class="column">

@@ -6,16 +6,16 @@ $pageData = $pageData[0];
 ?>
 
 <!-- inner page content -->
-<div class="mid"> 
-    <div class="content">
+<div class="mid" style="margin-top: 25px"> 
+    <div class="content container">
         <div class="heading-sec">
             <div class="headng">
-                <h4><?php echo $pageData->page_title; ?></h4>
+                <h1><?php echo $pageData->page_title; ?></h1>
             </div>
             <div class="clr"></div>
         </div>
         
-        <div class="inner_page">
+        <div class="inner_page static-page">
            <?php echo $pageData->content; ?>      
         </div>
     </div>

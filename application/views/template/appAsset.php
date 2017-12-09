@@ -16,6 +16,7 @@ $_custom_css  = [
 		"css/vendor/settings.css",
 		"css/vendor/navigation.css",
 		"css/theme.min.css",
+		"css/custom.css",
 	],
 	"product" => [
 		"css/vendor/socicon.min.css",

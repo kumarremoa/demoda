@@ -1,0 +1,13 @@
+img.single_image-img.attachment-full {
+    width: auto;
+}
+.column_container{
+	align-content: center;
+	align-content: center;
+	text-align: center;
+}
+.static-page li{
+	color: gray;
+  font-family: "Hind",sans-serif;
+  font-size: 14px;
+ }
