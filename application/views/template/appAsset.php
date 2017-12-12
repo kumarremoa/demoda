@@ -26,6 +26,11 @@ $_custom_css  = [
 		"css/vendor/magnific-popup.css",
 		"css/vendor/slidebars.min.css",
 		"css/theme.min.css",
+		"stylesheets/vendor/socicon.min.css",
+		"stylesheets/vendor/material-icons.min.css",
+		"stylesheets/theme.min.css",
+		
+
 	],
 
 ];
@@ -38,6 +43,17 @@ $_custom_js = [
 	"product" => [
 		"js/vendor/modernizr.custom.js",
 		"js/vendor/detectizr.min.js",
+		"js/vendor/jquery-2.1.4.min.js",
+		"js/vendor/preloader.min.js",
+		"js/vendor/bootstrap.min.js",
+		"js/vendor/nouislider.min.js",
+		"js/vendor/jquery.magnific-popup.min.js",
+		"js/vendor/wNumb.js",
+		"js/vendor/slick.min.js",
+		"js/vendor/isotope.pkgd.min.js",
+		"js/vendor/velocity.min.js",
+		"js/vendor/slidebars.min.js",
+		"js/vendor/jquery.themepunch.revolution.min.js",
 	]
 ];
 $_common_js = [];

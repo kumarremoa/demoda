@@ -1,406 +1,279 @@
-<!-- social media share -->
-<!--<script src="<?php echo $this->config->item('css_images_js_base_url'); ?>social_share/jquery.min.js" type="text/javascript" language="JavaScript"></script>-->
-<script src="<?php echo $this->config->item('css_images_js_base_url'); ?>social_share/jquery.share.js" type="text/javascript" language="JavaScript"></script>
-<link rel="stylesheet" href="<?php echo $this->config->item('css_images_js_base_url'); ?>social_share/jquery.share.css" type="text/css" />
-<script>
-//$s = $.noConflict();
-$(document).ready(function($){
- $('#mydiv').share({
-        networks: ['facebook','twitter'],
-        theme: 'square'
-    });
-  });
-</script>
-<!-- end social media share -->
-
-
-<!-- Include Cloud Zoom CSS. -->
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_images_js_base_url'); ?>css/cloudzoom.css" />
-
-<!-- Include Cloud Zoom script. -->
-<script type="text/javascript" src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/cloudzoom.js"></script>
-
-<!-- Call quick start function. -->
-<script type="text/javascript">            
-	CloudZoom.quickStart();			
-</script>
-
 <?php
-	$featured_image = '';
-	$flag = 0;
-	
-	foreach($product_details as $product_images)
-	{
-		if($product_images->is_featured == '1')
-			$featured_image = $this->config->item('site_url').'admin/uploads/products/large/'.$product_images->file_name;
-		
-		$large_image[] = $this->config->item('site_url').'admin/uploads/products/large/'.$product_images->file_name;
-		
-		// thumbnail name
-		$file_name = explode('.',$product_images->file_name);												
-		$file_ext = array_pop($file_name);												
-		$thumb_name = implode('.',$file_name).'_thumb.'.$file_ext;
-		
-		$thumb_image[] = $this->config->item('site_url').'admin/uploads/products/small/'.$thumb_name;
-		$medium_image[] = $this->config->item('site_url').'admin/uploads/products/medium/'.$thumb_name;
-		
-		// featured image
-		/*if($featured_image != '' && $flag == 0)
-		{
-			echo '<img src="'.$featured_image.'" class="featured_image" alt=""/>';
-			$flag = 1;
-		}*/
-		
-	   /* echo '<a href="'.$large_image.'" data-lightbox="example-set">
-				<img src="'.$thumb_image.'" alt=""/>
-			</a>';*/
-	}
-	
-	$product = $product_details[0];
-	/*
-	for($i=0; $i<sizeof($large_image); $i++)
-	{
-		 echo '<a href="'.$large_image[$i].'" data-lightbox="example-set">
-				<img src="'.$thumb_image[$i].'" alt=""/>
-			</a>';	
-	}	
-	*/
-	?>
+  $featured_image = '';
+  $flag = 0;
+  // echo "<pre>";
+  // print_r($product_details);
+  // die;
+  foreach($product_details as $product_images)
+  {
+    if($product_images->is_featured == '1')
+      $featured_image = $this->config->item('site_url').'admin/uploads/products/large/'.$product_images->file_name;
+    
+    $large_image[] = $this->config->item('site_url').'admin/uploads/products/large/'.$product_images->file_name;
+    
+    // thumbnail name
+    $file_name = explode('.',$product_images->file_name);                       
+    $file_ext = array_pop($file_name);                        
+    $thumb_name = implode('.',$file_name).'_thumb.'.$file_ext;
+    
+    $thumb_image[] = $this->config->item('site_url').'admin/uploads/products/small/'.$thumb_name;
+    $medium_image[] = $this->config->item('site_url').'admin/uploads/products/medium/'.$thumb_name;
+    
+    // featured image
+    /*if($featured_image != '' && $flag == 0)
+    {
+      echo '<img src="'.$featured_image.'" class="featured_image" alt=""/>';
+      $flag = 1;
+    }*/
+    
+     /* echo '<a href="'.$large_image.'" data-lightbox="example-set">
+        <img src="'.$thumb_image.'" alt=""/>
+      </a>';*/
+  }
+  
+  $product = $product_details[0];
+  /*
+  for($i=0; $i<sizeof($large_image); $i++)
+  {
+     echo '<a href="'.$large_image[$i].'" data-lightbox="example-set">
+        <img src="'.$thumb_image[$i].'" alt=""/>
+      </a>';  
+  } 
+  */
+  ?>
+<!-- Preloader -->
+<!--
+   Data API:
+   data-spinner - Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7'
+   data-screenbg - Screen background color. Hex, RGB or RGBA colors
+   -->
+<div id="preloader" data-spinner="spinner2" data-screenbg="#fff"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+    </div>
+  </div>
+</div>
 
-<ol class="breadcrumb">
-    <li><a href="<?php echo $this->config->item('site_url'); ?>">Home</a></li>
-    <li><a href="javascript:void(0)"><?php echo ucwords($product->parent_category_title); ?></a></li>
-    <li class="active"><a href="<?php echo base_url().'product/category/'.$product->sub_category_id; ?>"><?php echo ucwords($product->sub_category_title); ?></a></li>
-</ol>
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+   <div canvas="container">
+      <main>
+         <!-- Page Title -->
+         <div class="page-title">
+            <div class="container">
+               <div class="breadcrumbs">
+                  <a href="index.html">Home</a>
+                  <span class="delimiter"><i class="material-icons keyboard_arrow_right"></i></span>
+                  <span>Shop</span>
+               </div>
+               <div class="title pull-right">Oversized Dress</div>
+            </div>
+         </div>
+         <!-- Page Title END -->
+         <section class="fw-section margin-bottom-1x">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-7">
 
-<!-- inner page content -->
-<div class="main-contnt">
-        	<div class="row">
-            	<div class="col-sm-5">
-                	<div class="zoom-effect">
-                    <?php
-					// featured image
-					if($featured_image != '')
-					{
-						//echo '<img src="'.$featured_image.'" class="featured_image" alt=""/>';	
-						echo '<img class = "cloudzoom featured_image" src = "'.$featured_image.'" data-cloudzoom = "zoomImage: \''.$featured_image.'\',zoomPosition:\'inside\', zoomOffsetX:0 " />';					
-					}
-					
-					
-					for($i=0; $i<sizeof($large_image); $i++)
-					{
-						 /*echo '<a href="'.$large_image[$i].'">
-								<img src="'.$thumb_image[$i].'" alt=""/>
-							</a>';*/
-						echo '<img class = \'cloudzoom-gallery\' src = "'.$thumb_image[$i].'" data-cloudzoom = "useZoom: \'.cloudzoom\', image: \''.$medium_image[$i].'\', zoomImage: \''.$large_image[$i].'\' " >';
-					}	
-					
-					?>
-                    <!--
-                     <img class = "cloudzoom" src = "images/small/image1.jpg" data-cloudzoom = "zoomImage: 'images/large/image1.jpg',zoomPosition:'inside', zoomOffsetX:0 " />
-        <br/>
-        <img class = 'cloudzoom-gallery' src = "images/thumbs/image1.jpg" data-cloudzoom = "useZoom: '.cloudzoom', image: 'images/small/image1.jpg', zoomImage: 'images/large/image1.jpg' " >
-        <img class = 'cloudzoom-gallery' src = "images/thumbs/image2.jpg" data-cloudzoom = "useZoom: '.cloudzoom', image: 'images/small/image2.jpg', zoomImage: 'images/large/image2.jpg' " >
-        <img class = 'cloudzoom-gallery' src = "images/thumbs/image3.jpg" data-cloudzoom = "useZoom: '.cloudzoom', image: 'images/small/image3.jpg', zoomImage: 'images/large/image3.jpg' " >
-        -->
-        
-                    	<!--<img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/zoom-effect.jpg" alt="">
-                        <a href="#"><img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/zoom-thumb.jpg" alt=""></a>
-                        <a href="#"><img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/zoom-thumb.jpg" alt=""></a>
-                        <a href="#"><img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/zoom-thumb.jpg" alt=""></a>
-                        <a href="#"><img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/zoom-thumb.jpg" alt=""></a>-->
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                	<div class="product-details">
-                    	<div class="row">
-                    	<div class="col-md-7">
-                        	<h1><?php echo ucwords($product->title); ?></h1>
-                            <p> <?php if(strlen(strip_tags($product->description)) != 0) { echo substr($product->description,0,35).'...'; } ?></p>
-                            <div class="review"><img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/review-img.jpg" alt=""><a href="#">See 157 reviews </a></div>
-                            <div class="clearfix"></div>
+                     <div class="single-slider">
+                        <div class="thumbnail-carousel" data-slick='{"dots": false,"vertical": true, "arrows": false}'>
+                          <?php foreach ($product_details as $product_images) {
+                            $large_image = $this->config->item('site_url').'admin/uploads/products/large/'.$product_images->file_name; ?>
+                            <a href="#img01"><img src="<?= $large_image ?>" alt="Thumb"></a>
+                          <?php } ?>
                         </div>
-                        <div class="col-md-5">
-                        	<a href="#" class="prz">
-							<?php 
-								$price = ($product->is_discount == 1) ? '<span style="text-decoration:line-through; padding:13px 40px 0px;">$'.$product->price.'</span> $'.number_format($product->price - $product->discount_price , 2) : '$'.$product->price;
-								echo $price;
-								//echo $product->price; 
-							?></a>
+                        <div class="image-preview1" data-slick='{"dots": true, "arrows": false, "swipe": true}'>
+                          <?php foreach ($product_details as $product_images) {
+                            $large_image = $this->config->item('site_url').'admin/uploads/products/large/'.$product_images->file_name; ?>
+                            <img src="<?= $large_image ?>" alt="Thumb">
+                          <?php } ?>
                         </div>
-                    </div>
-                    	<div class="btm-bdr"></div>
-                        <form action="<?php echo base_url().'product/addToCart/'; ?>" method="post">
-                        <div class="row">
-                        	<div class="col-md-7">
-                            	<span>Available Color -</span>
-                                <div class="colour">
-                                
-                               		 <?php
-										$available_color = explode('~',$product->color);
-										
-										for($i=0; $i<sizeof($available_color)-1; $i++)
-										{
-											echo '<a href="javascript:void(0);" onclick="set_color(\''.$available_color[$i].'\')" id="color_'.$available_color[$i].'"><span style="background:#'.$available_color[$i].'">'.$available_color[$i].'</span></a>';
-										}
-									?>
-                                
-                                 </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-5"><p class="free-shipping"><?php if($product->shipping_price == 0){ echo 'Free Shipping'; } else{ echo 'Shipping Price $'.$product->shipping_price; } ?></p></div>
+                     </div>
+                  </div>
+                  <div class="col-sm-5">
+                     <div class="single-item-info">
+                        <div class="item-logo">
+                           <h1><?php echo ucwords($product->title); ?></h1>
                         </div>
-                        <div class="bottom_bdr"></div>
-                        <div class="row">
-                        	<div class="col-md-6">
-                            	<span>Available Size -</span>
-                                <div class="size">
-                                	<?php
-										$available_size = explode(',',$product->available_size);
-										
-										for($i=0; $i<sizeof($available_size); $i++)
-										{
-											echo '<a href="javascript:void(0);" onclick="set_size(\''.$available_size[$i].'\')" id="size_'.$available_size[$i].'">'.$available_size[$i].'</a>';
-										}
-									?>
-                                	<!--<a href="#">S</a><a href="#">m</a><a href="#">l</a><a href="#">xl</a>-->
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-6">
-                            
-                            <?php
-								if($product->quantity > 0)
-								{
-							?>
-                            	<label> Qty :</label>
-                            	<select name="quantity" >
-                                <?php
-									for($i=1; $i<= $product->quantity; $i++)
-									{
-										echo '<option value="'.$i.'">'.$i.'</option>';	
-									}
-								?>			
-								</select>
-                                <?php 
-								}
-								else
-								{
-									echo '<p class="free-shipping">Out Of Stock</p>';	
-								}
-								 ?>
-                                <div class="clearfix"></div>
-                            </div>
+                        <div class="item-title">
+                           OVERSIZED DRESS
                         </div>
-                        <div class="bottom_bdr"></div>
-                    	<div class="cartsec">
-                        	
-                            	<input type="hidden" name="size" id="product_size" />
-                                <input type="hidden" name="color" id="product_color" />
-                                <input type="hidden" name="product_id" value="<?php echo $product->product_id; ?>" />
-                        		<!--<a class="cartbtn" href="<?php echo base_url().'product/addToCart/'.$product->product_id; ?>"><img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/cartbtn.png" alt="">Add to cart</a>-->
-                            	<a class="cartbtn" href="javascript:void(0);"><img src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/cartbtn.png" alt=""><input type="submit" value="Add to cart" onclick="return validate_add_to_cart();" /></a>
-                           		
-                             <!-- wishlist link -->
-								<?php 
-                                    if($this->session->userdata('user_id'))
+                        <div class="item-sku">
+                           Product Sku: 5110336
+                        </div>
+                        <div class="item-rating">
+                           <img src="img/rating.png" alt="">
+                           <span> (12 reviews)</span>
+                        </div>
+                        <div class="bages">
+                           <span class="bage">Sale 50%</span>
+                           <span class="bage bage-primary">New</span>
+                        </div>
+                        <div class="item-info">
+                           Eternity bands are a classy and stylish innovation to storm the market. These are often gifted for a marriage anniversary or at the time of giving birth to a child.
+                        </div>
+                        <div class="radio-group color">
+                           <div class="title">Choose Color</div>
+                           <?php 
+                            $available_color = explode('~',$product->color);
+                            foreach ($available_color as $key => $value) {
+                              echo "<span style='background-color: #$value;'></span>";
+                            }
+                            ?>
+                        </div>
+                        <div class="radio-group size">
+                        <div class="title">Choose Size</div>
+                        <?php 
+                        $available_size = explode(',',$product->available_size);
+                        foreach ($available_size as $key => $value) {
+                          echo "<span>$value</span>";
+                        }
+                         ?>
+                        </div>
+                        <div class="cost">
+                           $<?= $product->price ?> <span><?= $product->is_discount == 1 ? '$'.$product->price - $product->discount_price : '' ?></span>
+                        </div>
+                        <div class="action-tools">
+                           <div class="select inline">
+                              <select name="select">
+                                 <?php
+                                    for($i=1; $i<= $product->quantity; $i++)
                                     {
-                                        if(!in_array($product->product_id,$wishlist_product_ids))
-                                            echo '<a href="'.base_url().'user/addToWishlist/'.$product->product_id.'" class="wishlist"><img src="'.$this->config->item('css_images_js_base_url').'images/wishlist.png" alt="">Add to wishlist</a>';
-                                        else
-                                            echo '<a href="'.base_url().'user/deleteWishlist/'.$product->product_id.'" class="wishlist"><img src="'.$this->config->item('css_images_js_base_url').'images/wishlist.png" alt="">Delete wishlist</a>';
+                                      echo '<option value="'.$i.'">'.$i.'</option>';  
                                     }
-                                ?>
-                                <!-- end wishlist link -->
-                            <p class="dispatched">Product will be Dispatched in<br><strong><?php echo $product->time_to_deliver; ?> Working Days</strong></p>
+                                  ?>
+                              </select>
+                           </div>
+                           <a href="#" class="btn btn-gray right-icon margin-bottom-none">Add To Cart <i class="material-icons shopping_cart"></i></a>
+                           <a href="#" class="btn btn-gray btn-iconed margin-bottom-none"><i class="material-icons favorite_border"></i></a>
+                           <a href="#" class="btn btn-gray btn-iconed margin-bottom-none"><i class="material-icons compare_arrows"></i></a>
                         </div>
-                        <div class="bottom_bdr"></div>
-                         </form>
-                        <div class="mgtop35">
-                        	<div class="bs-example bs-example-tabs">
-                          <ul id="myTab" class="nav nav-tabs mgleft0 tabbutn">
-                            <li class="active"><a href="#desctription" data-toggle="tab">DESCRIPTION</a></li>
-                            <li class=""><a href="#product_overview" data-toggle="tab">PRODUCT OVERVIEW</a></li>
-                            <li class=""><a href="#specification" data-toggle="tab">SPECIFICATION</a></li>
-                          </ul>
-                          <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade in active" id="desctription">
-                              <h2 class="tab_title">Description</h2>	
-                              <p class="tab_matr">
-                              	<?php if(strlen(strip_tags($product->description)) != 0) { echo $product->description; } ?>
-                              </p>
-                            </div>
-                            <div class="tab-pane fade" id="product_overview">
-                              <h2 class="tab_title">Product Overview</h2>	
-                              <p class="tab_matr">
-                              	<?php if(strlen(strip_tags($product->overview)) != 0) { echo $product->overview; } ?>
-                              </p>
-                            </div>
-                            <div class="tab-pane fade" id="specification">
-                              <h2 class="tab_title">Specification</h2>	
-                              <p class="tab_matr">
-                              	<?php if(strlen(strip_tags($product->specification)) != 0) { echo $product->specification; } ?>
-                              </p>
-                            </div>
-                          </div>
+                        <div class="category">Woman / Bodysuit</div>
+                        <!-- Popular Tags -->
+                        <div class="widget tags-list-widget">
+                           <div class="tags-list">
+                              <a href="#">Clothes</a>
+                              <a href="#">Boots</a>
+                              <a href="#">Skirts</a>
+                           </div>
                         </div>
+                        <!-- Popular Tags END -->
+                        <div class="social">
+                           <div class="title">Share product</div>
+                           <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
+                           <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
+                           <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-pinterest"></i></a>
+                           <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-youtube"></i></a>
                         </div>
-                    </div>
-                </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-        	<?php
-				if(sizeof($related_products) > 0)
-				{
-			?>
-            <div class="row">
-                <div class="col-sm-12">
-                    <section class="fw-section margin-bottom-1x">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-sm-7">
-                            <div class="single-slider">
-                              <div class="thumbnail-carousel" data-slick='{"dots": false,"vertical": true, "arrows": false}'>
-                                <a href="#img01"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-01.jpg" alt="Thumb"></a>
-                                <a href="#img02"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-02.jpg" alt="Thumb"></a>
-                                <a href="#img03"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-03.jpg" alt="Thumb"></a>
-                                <a href="#img04"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-04.jpg" alt="Thumb"></a>
-                                <a href="#img05"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-02.jpg" alt="Thumb"></a>
-                                <a href="#img06"><img src="<?= $this->config->item('site_url') ?>img/product-gallery/thumb-05.jpg" alt="Thumb"></a>
-                              </div>
-
-                              <div class="image-preview1" data-slick='{"dots": true, "arrows": false, "swipe": true}'>
-                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/01.jpg" alt="Thumb">
-                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/02.jpg" alt="Thumb">
-                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/03.jpg" alt="Thumb">
-                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/04.jpg" alt="Thumb">
-                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/02.jpg" alt="Thumb">
-                                <img src="<?= $this->config->item('site_url') ?>img/product-gallery/05.jpg" alt="Thumb">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-5">
-                            <div class="single-item-info">
-                              <div class="item-logo">
-                                <img src="<?= $this->config->item('site_url') ?>img/single-item-logo.png" alt="">
-                              </div>
-                              <div class="item-title">
-                                OVERSIZED DRESS
-                              </div>
-                              <div class="item-sku">
-                                Product Sku: 5110336
-                              </div>
-                              <div class="item-rating">
-                                <img src="<?= $this->config->item('site_url') ?>img/rating.png" alt="">
-                                <span> (12 reviews)</span>
-                              </div>
-                              <div class="bages">
-                                <span class="bage">Sale 50%</span>
-                                <span class="bage bage-primary">New</span>
-                              </div>
-                              <div class="item-info">
-                                Eternity bands are a classy and stylish innovation to storm the market. These are often gifted for a marriage anniversary or at the time of giving birth to a child.
-                              </div>
-                              <div class="radio-group color">
-                                <div class="title">Choose Color</div>
-                                <span class="selected" style="background-color: #cabeae;"></span>
-                                <span style="background-color: #90b1db;"></span>
-                                <span style="background-color: #000;"></span>
-                              </div>
-                              <div class="radio-group size">
-                                <div class="title">Choose Size</div>
-                                <span>XXL</span>
-                                <span class="selected">XL</span>
-                                <span>L</span>
-                              </div>
-                              <div class="cost">
-                                $250 <span>$280</span>
-                              </div>
-                              <div class="action-tools">
-                                <div class="select inline">
-                                  <select name="select">
-                                  <?php if ($product->quantity > 0) {
-                                      for ($i=0; $i < $product->quantity; $i++) { ?>
-                                          <option><?= $i ?></option>
-                                    <?php  }
-                                  } ?>
-                                  </select>
-                                </div>
-
-                                <a href="#" class="btn btn-gray right-icon margin-bottom-none">Add To Cart <i class="material-icons shopping_cart"></i></a>
-
-                                <a href="#" class="btn btn-gray btn-iconed margin-bottom-none"><i class="material-icons favorite_border"></i></a>
-                                <a href="#" class="btn btn-gray btn-iconed margin-bottom-none"><i class="material-icons compare_arrows"></i></a>
-                              </div>
-                              <div class="category">Woman / Bodysuit</div>
-
-                              <!-- Popular Tags -->
-                              <div class="widget tags-list-widget">
-                                <div class="tags-list">
-                                  <a href="#">Clothes</a>
-                                  <a href="#">Boots</a>
-                                  <a href="#">Skirts</a>
-                                </div>
-                              </div><!-- Popular Tags END -->
-
-                              <div class="social">
-                                <div class="title">Share product</div>
-
-                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
-                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
-                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-pinterest"></i></a>
-                                <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-youtube"></i></a>
-                              </div>
-                            </div>
-                          </div>
+         </section>
+         <section class="fw-section">
+            <div class="container">
+               <hr>
+               <div class="text-center margin-bottom-2x">
+                  <!-- Nav Tabs -->
+                  <ul class="nav-tabs" role="tablist">
+                  <?php if(strlen(strip_tags($product->description)) != 0) { ?>
+                     <li class="active">
+                        <a href="#tab1" role="tab" data-toggle="tab">
+                        Description
+                        </a>
+                     </li>
+                  <?php } 
+                   if(strlen(strip_tags($product->overview)) != 0) { ?> 
+                     <li>
+                        <a href="#tab2" role="tab" data-toggle="tab">
+                        Product Overview
+                        </a>
+                     </li>
+                  <?php } 
+                   if(strlen(strip_tags($product->specification)) != 0) { ?>
+                     <li>
+                        <a href="#tab3" role="tab" data-toggle="tab">
+                        Specification
+                        </a>
+                     </li>
+                  <?php } ?>
+                  </ul>
+                  <!-- Nav Tabs END -->
+               </div>
+               <!-- Tab Panes -->
+               <div class="tab-content">
+               <?php if(strlen(strip_tags($product->description)) != 0) { ?>
+                  <div role="tabpanel" class="tab-pane transition fade in active" id="tab1">
+                      <p class="tab_matr">
+                        <?php if(strlen(strip_tags($product->description)) != 0) { echo $product->description; } ?>
+                      </p>
+                  </div>
+                  <?php } 
+                   if(strlen(strip_tags($product->overview)) != 0) { ?> 
+                  <div role="tabpanel" class="tab-pane transition fade" id="tab2">
+                    <p class="tab_matr">
+                      <?php if(strlen(strip_tags($product->overview)) != 0) { echo $product->overview; } ?>
+                    </p>
+                  </div>
+                  <?php } 
+                   if(strlen(strip_tags($product->specification)) != 0) { ?>
+                  <div role="tabpanel" class="tab-pane transition fade" id="tab3">
+                    <p class="tab_matr">
+                      <?php if(strlen(strip_tags($product->specification)) != 0) { echo $product->specification; } ?>
+                    </p>
+                  </div>
+                  <?php } ?>
+               </div>
+               <!-- Tab Panes END -->
+            </div>
+         </section>
+         <section class="fw-section margin-top-3x">
+            <div class="container">
+               <!-- Block Title -->
+               <h2 class="block-title text-left margin-bottom-2x">
+                  Related Products
+                  <small>b-shop</small>
+               </h2>
+               <!-- Block Title END -->
+               <div class="row">
+                <?php
+              foreach($related_products as $productDetail)
+              {
+                $price = ($productDetail->is_discount == 1) ? '<span>$'.$productDetail->price.'</span> $'.number_format($productDetail->price - $productDetail->discount_price , 2) : '$'.$productDetail->price;
+                  
+                // thumbnail name
+                $file_name = explode('.',$productDetail->file_name);                        
+                $file_ext = array_pop($file_name);                        
+                $thumb_name = implode('.',$file_name).'_thumb.'.$file_ext;
+                
+                $product_image = $this->config->item('site_url').'admin/uploads/products/medium/'.$thumb_name; 
+                ?>
+                <div class="col-md-3">
+                     <!-- Shop Grid Tile -->
+                     <div class="tile">
+                        <div class="preview-box">
+                           <img src="<?= $product_image ?>" alt="">
                         </div>
-                      </div>
-                    </section>
-                </div>
-            </div>
+                        <div class="tile-title">
+                           <a href="<?php echo base_url().'product/description/'.$productDetail->product_id; ?>"><?= ucwords($productDetail->title) ?></a>
+                        </div>
+                        <div class="tile-meta">
+                           <div class="meta-top">
+                              <a href="#" class="category"> </a>
+                              <span class="cost"><?= $price ?></span>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- Shop Grid Tile END -->
+                  </div>
 
-            <div class="row">
-            	<div class="col-sm-12">
-                	<div class="prodct_section">
-                    	<div class="product-row">
-                    	<h2>Related Products</h2>
-                        <div class="clearfix"></div>
-                    </div>
-                    	<div class="row">
-                        
-                        <?php
-							foreach($related_products as $productDetail)
-							{
-								//$price = '$'.$productDetail->price;
-								$price = ($productDetail->is_discount == 1) ? '<span>$'.$productDetail->price.'</span> $'.number_format($productDetail->price - $productDetail->discount_price , 2) : '$'.$productDetail->price;
-									
-								// thumbnail name
-								$file_name = explode('.',$productDetail->file_name);												
-								$file_ext = array_pop($file_name);												
-								$thumb_name = implode('.',$file_name).'_thumb.'.$file_ext;
-								
-								$product_image = $this->config->item('site_url').'admin/uploads/products/medium/'.$thumb_name;
-						
-							   echo '<div class="col-sm-3">
-										<div class="product-box">
-											<a href="'.base_url().'product/description/'.$productDetail->product_id.'"><img src="'.$product_image.'" alt=""></a>
-											<div class="pro_details">
-												<div class="price"><!--<span>$80.00</span>--> '.$price.' </div>
-												<p>'.ucwords($productDetail->title).'<!--<br />
-												<span>Item no.: '.$productDetail->product_code.'</span>--></p>
-												<span><img src="'.$this->config->item('css_images_js_base_url').'images/star.png" alt=""></span>
-											</div>
-										</div>
-									</div>';
-							}
-						?>
-                                                
-                    </div>
-                    </div>
-                </div>
+                <?php }?>
+               </div>
             </div>
-            <?php
-				} // end if(sizeof($related_products) > 0)
-				?>
-        </div>
-<!-- end inner page content -->
+         </section>
+      </main>
+   </div>
+</div>
+<!-- Page Wrapper END -->
