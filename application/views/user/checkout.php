@@ -33,11 +33,11 @@
 ?>
 	
     <!-- inner page content -->
-    <div class="mid"> 
-        <div class="content">
+    <div class="mid checkout"> 
+        <div class="container">
             <div class="heading-sec">
                 <div class="headng">
-                    <h4>Checkout</h4>
+                    <h1>Checkout</h1>
                 </div>
                 <div class="clr"></div>
             </div>
@@ -143,7 +143,7 @@
                              <div class="col-sm-6">
 							<div class="controls">
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">	
-							<button class="update-btn frt" type="submit" name="checkout">Checkout</button>
+							<button class="update-btn frt btn btn-default pull-right margin-top-10" type="submit" name="checkout">Checkout</button>
                             </div></div>
 							 <div class="clearfix"></div>
 							</form>

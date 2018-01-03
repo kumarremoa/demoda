@@ -40,10 +40,10 @@
 
 $route = [
 	'home' => 'home/index',
-	'user/(:any)/(:num)' => 'home/user/$1/$2',//for routing url
+	//'user/(:any)/(:num)' => 'home/user/$1/$2',//for routing url
 
 	'default_controller' => "home",
-	'404_override' => 'error/four-o-four',
+	'404_override' => 'error/index',
 	'about-us' => "home/page/1",
 	'shipping-rates' => "home/page/2",
 	'return-policy' => "home/page/13",
@@ -55,6 +55,8 @@ $route = [
 	'terms-conditions' => "home/page/9",
 	'size-n-fit-guide' =>"home/page/12",
 	'blog' => "blog/index",
+	'blog/(:num)' => "blog/index/$1",
+	'blog/(:any)' => "blog/detail/$1",
 
 ];
 

@@ -1,21 +1,21 @@
 <!-- inner page content -->
 <div class="mid"> 
-    <div class="content">
+    <div class="container">
         <div class="heading-sec">
             <div class="headng">
-                <h4>Order Details</h4>
+                <h1>Order Details</h1>
             </div>
             <div class="clr"></div>
         </div>
         
-        <div class="inner_page">
+        <div class="inner-html">
         <?php
 			
 			//echo '<pre>'; print_r($orderDetails); echo '</pre>';
 			$details = $orderDetails[0];
 		?>
         
-        <table class="payment_details">
+        <table class="table-responsive">
         	<tr>
                 <td class="shipping_address">
                     <div><strong>Shipping Address</strong></div>
@@ -33,7 +33,7 @@
             </tr>
         </table>
         
-        <table class="list_orders" cellpadding="0" cellspacing="0">
+        <table class="table-responsive" cellpadding="0" cellspacing="0">
         	<tr>
             	<th>Product</th>
                 <th>Quantity</th>
@@ -48,7 +48,7 @@
 					$price = ($order->is_discount == 1) ? $order->price-$order->discount_price : $order->price;
 					$total += $order->ordered_quantity * $price;
 					echo '<tr>
-							<td>'.$order->title.'</td>
+							<td><strong>'.ucwords($order->title).'</strong></td>
 							<td>'.$order->ordered_quantity.'</td>
 							<td>'.$price.'</td>
 							<td>'.$order->ordered_quantity * $price.'</td>
@@ -65,7 +65,7 @@
         
         </table>        
         
-        <div style="text-align:right; width:85%; margin:0 auto;"><a href="<?php echo base_url().'user/pdf/'.$order->order_id.'/download'; ?>">Download PDF</a></div>
+        <div class="pull-right margin-top-10"><a href="<?php echo base_url().'user/pdf/'.$order->order_id.'/download'; ?>" class="btn btn-default">Download PDF</a></div>
         
         </div>
     </div>

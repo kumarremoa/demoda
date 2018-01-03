@@ -414,7 +414,7 @@ class Usermodel extends CI_Model {
 			$to = $email;
 			$to_name = $userData->first_name.' '.$userData->last_name;
 			
-			$from = 'no-reply@go4college.com';
+			$from = 'customercare@demodasecrets.com';
 			$from_name = 'Customer Support Team';
 			
 			$subject = "Password Recovery Email";
@@ -661,7 +661,7 @@ class Usermodel extends CI_Model {
 
 		if($mail_type == 'invoice_mail_to_buyer')
 			$this->db->where('id',1);
-		else if($mail_type == 'invoice_mail_to_zpLoft')
+		else if($mail_type == 'invoice_mail_to_demoda')
 			$this->db->where('id',2);
 		else if($mail_type == 'invoice_mail_to_vendor')
 			$this->db->where('id',3);

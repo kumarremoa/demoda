@@ -19,6 +19,7 @@ class Productmodel extends CI_Model {
 		$data = $formData;
 	
 		$data['available_size'] = implode(',',$formData['available_size']);
+		$data['link_rewrite'] = strtolower(str_replace(" ", '-', $formData['title']));
 		
 		if($product_id != '')
 		{
@@ -36,7 +37,6 @@ class Productmodel extends CI_Model {
 		$data = '';		
 		$data['product_id'] = $product_id;
 		
-		
 		if($imageData['image']['name'][0] != '')
 		{
 			$j = 0;
@@ -49,7 +49,11 @@ class Productmodel extends CI_Model {
 				$thumb_folder = 'uploads/products/large/'; // This is the folder to which the images will be saved
 				$tmp_file = $thumb_folder.$file_name; // save file in tmp folder
 				// Now use the move_uploaded_file function to move the file from its temporary location to its new location as defined above.
-				move_uploaded_file($_FILES['image']['tmp_name'][$i], $tmp_file);
+				// print_r([$_FILES['image']['tmp_name'][$i], $tmp_file]);die;
+				if(move_uploaded_file($_FILES['image']['tmp_name'][$i], $tmp_file)){
+				} else{
+					die('Pic not uploaded to the uploads folder');
+				}
 				// resize image
 				$this->load->library('image_lib');
 				$path = 'uploads/products/';

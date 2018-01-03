@@ -1,4 +1,5 @@
 <!-- home slider -->
+<?php /*
 <script type="text/javascript" src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/home_slider/jssor.core.js"></script>
 <script type="text/javascript" src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/home_slider/jssor.utils.js"></script>
 <script type="text/javascript" src="<?php echo $this->config->item('css_images_js_base_url'); ?>js/home_slider/jssor.slider.js"></script>
@@ -76,43 +77,39 @@
 
 <style>
 
-.jssora12l, .jssora12r, .jssora12ldn, .jssora12rdn {
-	position: absolute;
-	cursor: pointer;
-	display: block;
-	background: url('<?php echo $this->config->item('css_images_js_base_url'); ?>images/a12.png') no-repeat;
-	overflow: hidden;
-}
-.jssora12l { background-position: -16px -37px; }
-.jssora12r { background-position: -75px -37px;}
-.jssora12l:hover { background-position: -136px -37px; }
-.jssora12r:hover { background-position: -195px -37px; }
+	.jssora12l, .jssora12r, .jssora12ldn, .jssora12rdn {
+		position: absolute;
+		cursor: pointer;
+		display: block;
+		background: url('<?php echo $this->config->item('css_images_js_base_url'); ?>images/a12.png') no-repeat;
+		overflow: hidden;
+	}
+	.jssora12l { background-position: -16px -37px; }
+	.jssora12r { background-position: -75px -37px;}
+	.jssora12l:hover { background-position: -136px -37px; }
+	.jssora12r:hover { background-position: -195px -37px; }
 
-/*.jssorb05 div{background:#ccc; border-radius:7px; background: url(<?php echo $this->config->item('css_images_js_base_url'); ?>images/b05.png) no-repeat;}
-.jssorb05 .av{background:#555; border-radius:7px;background: url(<?php echo $this->config->item('css_images_js_base_url'); ?>images/b05.png) no-repeat;}
-*/
-
-.jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
-	background: url(<?php echo $this->config->item('css_images_js_base_url'); ?>images/b05.png) no-repeat;
-}
-.jssorb05 div {
-	background-position: -7px -7px;
-}
-
-	.jssorb05 div:hover, .jssorb05 .av:hover {
-		background-position: -37px -7px;
+	.jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+		background: url(<?php echo $this->config->item('css_images_js_base_url'); ?>images/b05.png) no-repeat;
+	}
+	.jssorb05 div {
+		background-position: -7px -7px;
 	}
 
-.jssorb05 .av {
-	background-position: -67px -7px;
-}
+		.jssorb05 div:hover, .jssorb05 .av:hover {
+			background-position: -37px -7px;
+		}
 
-.jssorb05 .dn, .jssorb05 .dn:hover {
-	background-position: -97px -7px;
-}
+	.jssorb05 .av {
+		background-position: -67px -7px;
+	}
 
-#slider1_container.home_slider{ border:1px solid #ddd; margin-top:15px;}
-.home_slider div{margin:0 !important; padding:0 !important;}
+	.jssorb05 .dn, .jssorb05 .dn:hover {
+		background-position: -97px -7px;
+	}
+
+	#slider1_container.home_slider{ border:1px solid #ddd; margin-top:15px;}
+	.home_slider div{margin:0 !important; padding:0 !important;}
 
 </style>
 <!-- end home slider -->
@@ -430,7 +427,7 @@
 								
 								echo '<div class="col-sm-12">
 										<div class="product-box">
-											<a href="'.base_url().'product/description/'.$productDetail->product_id.'"><img src="'.$product_image.'" alt=""></a>
+											<a href="'.base_url().'product/description/'.$productDetail->link_rewrite.'"><img src="'.$product_image.'" alt=""></a>
 											<div class="pro_details">
 												<div class="price"><!--<span>$80.00</span>--> '.$price.' </div>
 												<p>'.ucwords($productDetail->title).'<!--<br />
@@ -721,4 +718,12 @@
     </script>
    
    <!-- end product slider script -->  
-   
+   */ ?>
+<?php
+
+
+   // echo "<pre>";print_r($data);die;
+	$this->load->view('home/banner',$data);
+	$this->load->view('home/categoty_list',$data);
+  $this->load->view('home/home_new',$data); 
+   ?>

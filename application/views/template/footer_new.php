@@ -132,8 +132,10 @@
   "js/vendor/wNumb.js",
   "js/vendor/velocity.min.js",
   "js/vendor/slidebars.min.js",
+  "js/vendor/jquery.themepunch.tools.min.js",
   "js/vendor/jquery.themepunch.revolution.min.js",
   "js/scripts.js",
+
 ];
 foreach ($jsAsset as $value) { ?>
   <script src="<?= $this->config->item('css_images_js_base_url')."$value" ?>" type="text/javascript"></script>

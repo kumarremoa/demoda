@@ -23,6 +23,7 @@ $r(document).ready(
 		$content = $blog_details[0]->content;
 		$link_rewrite  = $blog_details[0]->link_rewrite;
 		$image_path = $blog_details[0]->image_path;
+		$status = $blog_details[0]->status;
 
 
 		?>
@@ -54,7 +55,7 @@ $r(document).ready(
 				<?php
 					// create form
 					$attributes = array('class' => 'form-horizontal well', 'id' => 'editPageForm', 'enctype'=> "multipart/form-data");
-					echo form_open('page/updatePage', $attributes);
+					echo form_open('blog/updateBlog', $attributes);
 				?>
 				
 				<div class="heading clearfix">
@@ -87,15 +88,28 @@ $r(document).ready(
 				<div class="control-group">
 					<label class="control-label">Content</label>
 					<div class="controls">
-					<textarea name="content" id="redactor" style="width: 637px; height: 210px;"><?php echo $content; ?></textarea>		
+					<textarea name="content" id="redactor" style="width: 637px; height: 510px;"><?php echo $content; ?></textarea>		
 													
 					</div>
 				</div>
 
 				<div class="control-group">
+                    <label class="control-label">Status</label>
+                    <div class="controls">
+                    <select name="status" required="required">
+                        <option disabled="disabled" >-Select-</option>
+                        <option value="0" <?=$status== '0' ? 'selected':''?> >Inactive</option>
+                        <option value="1" <?=$status== '1' ? 'selected':''?>>Active</option>
+                        <option value="2" <?=$status== '2' ? 'selected':''?>>Deleted</option>
+                    </select>                                                  
+                    </div>
+                </div>
+
+				<div class="control-group">
                     <label class="control-label">Cover Image<span class="f_req">*</span></label>
                     <div data-fileupload="file" class="controls fileupload fileupload-new">
-                        <input type="file" name="image_path" />
+                        <input type="file" name="image_path[]" multiple="multiple" />
+                        
                     </div>                          
                 </div>							
 								

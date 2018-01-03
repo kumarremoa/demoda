@@ -40,13 +40,14 @@ class User extends CI_Controller {
 		$cart_details = $this->Usermodel->total_order_amount();		
 		$data['total_cart_items'] = $cart_details['total_cart_items'];
 		$data['total_amount'] = $cart_details['total_amount'];		
-		
+		$data['featuredProductDetails'] = $this->Productmodel->getFeaturedProducts(5);
+
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/cart',$data);
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	
@@ -127,9 +128,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/checkout');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	public function thankyou()
@@ -142,9 +143,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 				
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/thankyou');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	public function errorPayment()
@@ -157,9 +158,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 				
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/errorPayment');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	
@@ -185,9 +186,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/signup');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	function account()
@@ -227,9 +228,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/account',$data);
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	function logout()
@@ -259,9 +260,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/signin');
-		$this->load->view('template/footer');	
+		$this->load->view('template/footer_new');	
 	}
 	
 	function forgotPassword()
@@ -288,9 +289,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/forgot-password');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	
@@ -318,9 +319,10 @@ class User extends CI_Controller {
 		else
 			$this->session->set_userdata('msg','Already in wishlist.');
 			
-		if(!$request_from_page)	
-			redirect('product/description/'.$product_id);		
-		else if($request_from_page == 'home')
+		if(!$request_from_page){	
+			$link = $this->Productmodel->getLinkById($product_id);			
+			redirect('product/description/'.$link);		
+		}else if($request_from_page == 'home')
 			redirect('home');
 		else if($request_from_page == 'search')
 			redirect('product/search');	
@@ -337,9 +339,10 @@ class User extends CI_Controller {
 		else
 			$this->session->set_userdata('msg','Not in wishlist.');
 		
-		if(!$request_from_page)	
-			redirect('product/description/'.$product_id);
-		else if($request_from_page == 'wishlist')
+		if(!$request_from_page){
+			$link = $this->Productmodel->getLinkById($product_id);
+			redirect('product/description/'.$link);
+		}else if($request_from_page == 'wishlist')
 			redirect('user/'.$request_from_page);
 		else if($request_from_page == 'home')
 			redirect('home');
@@ -400,10 +403,11 @@ class User extends CI_Controller {
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
+		$data['featuredProductDetails'] = $this->Productmodel->getFeaturedProducts(5);
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/wishlist');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 		
 		
 	}
@@ -446,9 +450,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/orders');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 		
 	}
 	
@@ -468,9 +472,9 @@ class User extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 		
-		$this->load->view('template/header',$data);
+		$this->load->view('template/header_new',$data);
 		$this->load->view('user/order-details');
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 	}
 	
 	
@@ -554,8 +558,8 @@ class User extends CI_Controller {
 			
 			
 			//$from = 'support@zploft.com';
-			$from = 'abhishek@gmail.com';
-			$from_name = 'ZPLOFT';
+			$from = 'customercare@demodasecrets.com';
+			$from_name = 'Demodasecrets';
 			
 			$subject = "Invoice";
 			$message = "Dear ".$to_name."<br>";
@@ -592,7 +596,7 @@ class User extends CI_Controller {
 		{
 			// send mail to zploft admin
 			
-			$mail_content = $this->Usermodel->getMailContent('invoice_mail_to_zpLoft');
+			$mail_content = $this->Usermodel->getMailContent('invoice_mail_to_demoda');
 			//print_r($mail_content); exit;
 			
 			//$to = 'admin@zploft.com';

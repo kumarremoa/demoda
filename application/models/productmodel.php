@@ -9,7 +9,7 @@ class Productmodel extends CI_Model {
 	//get header menu Categories
 	function getAllCategories()
 	{
-		$this->db->select('c.id as category_id, c.title as category_title,s.id as sub_category_id,s.title as subcategory_title');
+		$this->db->select('c.id as category_id, c.title as category_title,c.cat_link_rewrite, s.id as sub_category_id,s.title as subcategory_title,s.sub_cat_link_rewrite');
 		$this->db->from('categories c');
 		$this->db->join('subcategories s','s.category_id=c.id','left');		
 		$this->db->where('c.active', '1');
@@ -22,7 +22,7 @@ class Productmodel extends CI_Model {
 	}
 		
 	// new arrivals
-	function getAllProducts()
+	function getAllProducts($limit= 8)
 	{
 		$this->db->select('p.id as product_id, p.*,i.file_name');
 		$this->db->from('products p');
@@ -32,6 +32,7 @@ class Productmodel extends CI_Model {
 		$this->db->where('p.is_active', '1');
 		$this->db->order_by('p.id', 'desc');
 		$this->db->group_by('p.id');
+		$this->db->limit($limit);
 	
 		$recordSet = $this->db->get();
 	  // echo $this->db->last_query(); exit;
@@ -39,20 +40,23 @@ class Productmodel extends CI_Model {
 	}
 	
 	
-	function getFeaturedProducts()
+	function getFeaturedProducts($limit = 8)
 	{
-		$this->db->select('p.id as product_id, p.*,i.file_name');
+		$this->db->select('p.id as product_id, p.*,i.file_name,s.title as sub_category_title, s.sub_cat_link_rewrite');
 		$this->db->from('products p');
-		$this->db->join('product_images i','i.product_id=p.id','left');		
+		$this->db->join('product_images i','i.product_id=p.id','left');
+		$this->db->join('subcategories s', 'p.category_id = s.id','left');		
 		$this->db->where('i.is_featured', '1');
 		$this->db->where('p.quantity >', '0');
 		$this->db->where('p.is_active', '1');
 		$this->db->where('p.is_featured', '1');
 		$this->db->order_by('p.id', 'desc');
 		$this->db->group_by('p.id');
+		$this->db->limit($limit);
 	
 		$recordSet = $this->db->get();
 	   //echo $this->db->last_query(); exit;
+		 
 		return $recordSet->result();
 	}
 	
@@ -126,11 +130,11 @@ class Productmodel extends CI_Model {
 	/*
 	* Get product details
 	*/
-	public function getDetails($product_id)
+	public function getDetails($link_rewrite)
 	{
 		$rs = array();
 		//$sql="SELECT p.*,i.id as image_id,i.* FROM (products p left join product_images i ON p.id=i.product_id) where p.id=".$product_id;
-		$sql="SELECT p.*,i.id as image_id,i.*,c.id as parent_category_id, c.title as parent_category_title,s.id as sub_category_id,s.title as sub_category_title FROM (((products p left join product_images i ON p.id=i.product_id) left join subcategories s ON s.id=p.category_id) left join categories c ON c.id=s.category_id) where p.id=".$product_id;
+		$sql="SELECT p.*,i.id as image_id,i.*,c.id as parent_category_id, c.title as parent_category_title,s.id as sub_category_id,s.title as sub_category_title FROM (((products p left join product_images i ON p.id=i.product_id) left join subcategories s ON s.id=p.category_id) left join categories c ON c.id=s.category_id) where p.link_rewrite='".$link_rewrite."'";
 		//echo $sql;
 		//$this->db->limit($limit, $start);
 		$recordSet = $this->db->query($sql);
@@ -149,11 +153,11 @@ class Productmodel extends CI_Model {
 	/**
 	 * Get related products based on product id
 	 */
-	function getRelatedProducts($product_id)
+	function getRelatedProducts($link_rewrite)
 	{
 		$rs = array();
 		//$sql = "SELECT `p`.`id` as product_id, `p`.*, `i`.`file_name` FROM (`products` p LEFT JOIN `product_images` i ON `i`.`product_id`=`p`.`id`) WHERE `i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id IN (select category_id from products p1 where p1.id=".$product_id.") AND p.id<>".$product_id." GROUP BY `p`.`id` ORDER BY `p`.`id` desc";
-		$sql = "SELECT `p`.`id` as product_id, `p`.*, `i`.`file_name` FROM (`products` p LEFT JOIN `product_images` i ON `i`.`product_id`=`p`.`id`) WHERE `i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id IN (select category_id from products p1 where p1.id=".$product_id.") AND p.id<>".$product_id." AND p.quantity>0 GROUP BY `p`.`id` ORDER BY RAND() LIMIT 4";
+		$sql = "SELECT `p`.`id` as product_id, `p`.*, `i`.`file_name`,`s`.title as sub_category_title, `s`.sub_cat_link_rewrite, `s`.id as sub_id FROM (`products` p LEFT JOIN `product_images` i ON `i`.`product_id`=`p`.`id` INNER JOIN `subcategories` s ON `p`.category_id = `s`.id) WHERE `i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id IN (select category_id from products p1 where p1.link_rewrite='".$link_rewrite."') AND p.link_rewrite<>'".$link_rewrite."' AND p.quantity>0 GROUP BY `p`.`id` ORDER BY RAND() LIMIT 4";
 		$recordSet = $this->db->query($sql);
 		if($recordSet->num_rows()>0)
 		{
@@ -199,16 +203,34 @@ class Productmodel extends CI_Model {
 		return $recordSet->num_rows();
 	}
 	
-	function product_by_category($category_id,$limit,$start)
+	function product_by_category($category_id,$limit,$start,$params = [])
 	{
+		if (!empty($params['price_range'])) {
+			$params['price_range']['min'];
+		}
 		$order_by = ($this->session->userdata('short_by') && $this->session->userdata('short_by') == 'price') ? '`p`.`price`' : '`p`.`id`' ;
 		$rs = array();
-		$sql = "SELECT `p`.`id` as product_id, `p`.*, `i`.`file_name` FROM (`products` p LEFT JOIN `product_images` i ON `i`.`product_id`=`p`.`id`) WHERE `i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id = '".$category_id."' AND p.quantity>0 GROUP BY `p`.`id` ORDER BY ".$order_by." desc LIMIT ".$start.",".$limit;
+		$this->db->select('`p`.`id` as product_id, `p`.*, `i`.`file_name`');
+		$this->db->from('products p');
+		$this->db->join('product_images i','i.product_id=p.id','left');
+		$this->db->where("`i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id = '".$category_id."' AND p.quantity>0");
+		$this->db->order_by("$order_by", 'desc');
+		$this->db->group_by('p.id');
+		$this->db->limit($limit, $start);
+		$recordSet = $this->db->get();
+		if ($recordSet->num_rows>0) {
+			$rs = $recordSet->result();
+		}
+		// ->result();
+		//echo"<pre>";print_r($recordSet);die;
+
+		return $rs;
+		/*$sql = "SELECT `p`.`id` as product_id, `p`.*, `i`.`file_name` FROM (`products` p LEFT JOIN `product_images` i ON `i`.`product_id`=`p`.`id`) WHERE `i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id = '".$category_id."' AND p.quantity>0 GROUP BY `p`.`id` ORDER BY ".$order_by." desc LIMIT ".$start.",".$limit;
 		$recordSet = $this->db->query($sql);
 		if($recordSet->num_rows()>0)
 		{
 			$rs = $recordSet->result();
-		}
+		}*/
 		
 		//return $sql;
 		//echo $this->db->last_query(); exit;
@@ -224,6 +246,40 @@ class Productmodel extends CI_Model {
 			
 		$recordSet = $this->db->get()->row();
 		return $recordSet;
+	}
+
+	public function getSubCatData($cat_link_rewrite)
+	{
+		$this->db->select('s.*');
+		$this->db->from('subcategories s');
+		$this->db->where('s.sub_cat_link_rewrite', $cat_link_rewrite);
+		$recordSet = $this->db->get()->row();
+		return $recordSet;
+	}
+
+	public function getLinkById($id)
+	{
+		$this->db->select('p.link_rewrite');
+		$this->db->from('products p');
+		$this->db->where('p.id', $id);
+		$recordSet = $this->db->get()->row();
+		return $recordSet->link_rewrite;
+	}
+
+	function getCategoriesWithImages($limit = 20)
+	{
+		$this->db->select('p.id as product_id, p.*,i.file_name, c.title as cat_name, c.cat_link_rewrite, s.title as sub_category_title, s.sub_cat_link_rewrite');
+		$this->db->from('products p');
+		$this->db->join('subcategories s', 's.id = p.category_id');
+		$this->db->join('categories c', 'c.id = s.category_id');
+		$this->db->join('product_images i','i.product_id=p.id','left');
+		$this->db->where('p.quantity >', '0');
+		$this->db->order_by('p.id', 'desc');
+		$this->db->group_by('p.category_id');
+			
+		$recordSet = $this->db->get();
+	  // echo $this->db->last_query(); exit;
+		return $recordSet->result();
 	}
 	
 }

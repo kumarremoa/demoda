@@ -19,27 +19,13 @@ class Blog extends CI_Controller {
      {
             parent::__construct();
             // Your own constructor code
-			//$this->load->model('blogmodel');	
+			$this->load->model('Blogmodel');	
      }
 	   
 		
 	public function index()
-	{		die;
-		// banner images
-		$data['slider_images'] = $this->Homemodel->getSliderImages();
-		
-		// new products
-		$data['productDetails'] = $this->Productmodel->getAllProducts();
-		
-		// featured products
-		$data['featuredProductDetails'] = $this->Productmodel->getFeaturedProducts();
-		
-		// special products
-		$data['specialProductDetails'] = $this->Productmodel->getSpecialProducts();
-		
-		// user wishlist product ids
-		$data['wishlist_product_ids'] = $this->Usermodel->getWishlistProductIds();
-		
+	{	
+		$data['newsData'] = $this->Blogmodel->getallBlogs();		
 		// total ordered amount
 		$cart_details = $this->Usermodel->total_order_amount();		
 		$data['total_cart_items'] = $cart_details['total_cart_items'];
@@ -47,23 +33,42 @@ class Blog extends CI_Controller {
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
+
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'blog';
+		$config['total_rows'] = $this->Blogmodel->total_articles(); // total records to paginate
+		$config['per_page'] = 1;
+		$config['uri_segment'] = 2;
+		//$config['num_links'] = 1;
+		$config['use_page_numbers'] = TRUE;
+		$config['first_tag_open'] = '<span class="page_nav_first">';
+		$config['first_tag_close'] = '</span>';
+		$config['last_tag_open'] = '<span class="page_nav_last">';
+		$config['last_tag_close'] = '</span>';
+		$page = ($this->uri->segment(2) != '') ? $this->uri->segment(2) : 0;	// current page	
+		$start = ($page > 0) ? (($page-1)*$config['per_page']) : 0;
+		
+		$data['results'] = $data['newsData'] = $this->Blogmodel->getallBlogs($config['per_page'],$start);
+		$this->pagination->initialize($config);
+		//echo"<pre>";print_r($this->pagination->create_links());die;
+		$data['links'] = $this->pagination->create_links();
 		
 		// load home.php
-		$this->load->view('template/header',$data);
-		$this->load->view('home/home',$data);
-		$this->load->view('template/footer');
+		$this->load->view('template/header_new',$data);
+		$this->load->view('blog/list-blogs',$data);
+		$this->load->view('template/footer_new');
 	}
 	
 	
 	// show static page
-	public function page($page_id)
+	public function detail($link_rewrite)
 	{		
-		$data['pageData'] = $this->Homemodel->getStaticPageContent($page_id);
+		$data['newsData'] = $this->Blogmodel->getBlogContent($link_rewrite);
 
 		// show 404 error page if id does not exist in database
-		if(sizeof($data['pageData']) == 0)
+		if(sizeof($data['newsData']) == 0)
 			show_404();
-		
+		$this->Blogmodel->increaseViewCount($link_rewrite);
 		// total ordered amount
 		$cart_details = $this->Usermodel->total_order_amount();		
 		$data['total_cart_items'] = $cart_details['total_cart_items'];
@@ -72,9 +77,9 @@ class Blog extends CI_Controller {
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
 				
-		$this->load->view('template/header',$data);
-		$this->load->view('home/static-page',$data);
-		$this->load->view('template/footer');
+		$this->load->view('template/header_new',$data);
+		$this->load->view('blog/blog-details',$data);
+		$this->load->view('template/footer_new');
 	}
 	
 }

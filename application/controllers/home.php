@@ -20,6 +20,7 @@ class Home extends CI_Controller {
             parent::__construct();
             // Your own constructor code
 			$this->load->model('Homemodel');
+			$this->load->model('Blogmodel');
 			
 			parse_str( $_SERVER['QUERY_STRING'], $_REQUEST );
 			$CI = & get_instance();
@@ -54,21 +55,24 @@ class Home extends CI_Controller {
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
+		$data['categories'] = $this->Productmodel->getCategoriesWithImages();
+		$data['newsData'] = $this->Blogmodel->getallBlogs(3, 0);
+		// echo "<pre>";print_r($data['newsData']);die;
 		$data['seoData']  = $this->getSeoHomeComponents();
 		
 		// load home.php
 		// $this->load->view('home/index.html');
 		$this->load->view('template/header_new',$data);
-		$this->load->view('home/home',$data);
+		$this->load->view('home/home',['data' => $data]);
 		$this->load->view('template/footer_new');
 	}
 	
-	public function user($any , $num)
+	/*public function user($any , $num)
 	{
 		echo $any;
 		echo $num;
 		die('eci');
-	}
+	}*/
 	
 	// show static page
 	public function page($page_id)

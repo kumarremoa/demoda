@@ -56,13 +56,12 @@ class Blogmodel extends CI_Model {
 	public function saveBlogData($formData, $imageData)
 	{
 		if(isset($formData['id']))
-			$product_id = array_pop($formData);
+			$page_id = array_pop($formData);
 		else
-			$product_id = '';
-		
-		$shift = array_shift($formData);
+			$page_id = '';
+
+		// echo "<pre>";;print_r([$page_id, 'wibouboib',"wifuboupon", $formData]);die;
 		$data = $formData;
-		$page_id = $formData['id'];
 		$formData['image_path'] = $this->addImage($imageData);
 		$this->db->where('id',$page_id);
 		$this->db->update('articles',$formData);
@@ -81,16 +80,16 @@ class Blogmodel extends CI_Model {
 	public function addImage($imageData = [])
 	{
 		if($imageData['image_path']['name'][0] != ''){
-			for($i=0; $i<sizeof($imageData['image']['name']); $i++)
+			for($i=0; $i<sizeof($imageData['image_path']['name']); $i++)
 			{
 				$random_digit=rand(0000,9999);
-				$file_name=$random_digit.$imageData['image']['name'][$i];
+				$file_name=$random_digit.$imageData['image_path']['name'][$i];
 				$file_name = str_replace(" ","_",$file_name);
 				// The file supplied is valid...Set up some variables for the location and name of the file.
 				$thumb_folder = 'uploads/articles/large/'; // This is the folder to which the images will be saved
 				$tmp_file = $thumb_folder.$file_name; // save file in tmp folder
 				// Now use the move_uploaded_file function to move the file from its temporary location to its new location as defined above.
-				move_uploaded_file($_FILES['image']['tmp_name'][$i], $tmp_file);
+				move_uploaded_file($_FILES['image_path']['tmp_name'][$i], $tmp_file);
 				// resize image
 				$this->load->library('image_lib');
 				$path = 'uploads/articles/';

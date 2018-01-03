@@ -100,10 +100,10 @@ $this->load->view('template/appAsset');
                         <li> -- or -- </li>
                         <li><a href="<?php echo base_url(); ?>user/signin" <?php if($this->router->fetch_method() == 'signin'){ echo 'class="active"'; } ?>>Login</a></li>
                     </ul>
-				<?php }?>                    
+				            <?php }?>                    
                     <div class="clearfix"></div>
                 </div>
-            </div>
+          </div>
         	<div class="clearfix"></div>
         </div>
         <div class="row">

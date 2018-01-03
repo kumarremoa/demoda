@@ -6,9 +6,10 @@
   <meta name="description" content="<?= isset($seoData) ? $seoData['description'] : 'Get widest collection of quality nighty, mothercare & ethnic wear at Demoda. Shop online for Sleepshirts, Nighties, Kurtis, Nightgowns & more.' ?>" />
   <meta name="author" content="demodasecrets.com" />
 <?php 
-$this->load->view('template/appAsset');
+  $this->load->view('template/appAsset');
+  $this->load->view('template/_url_rewrite');
   // meta property for fb share
-  if($this->router->fetch_class() == 'product' && $this->router->fetch_method() == 'description')
+  if($this->router->fetch_class() == 'product' && $this->router->fetch_method() == 'description' && !empty($product_details))
   {
     // echo '<pre>'; print_r($product_details); echo '</pre>'; 
     foreach($product_details as $product_detail)
@@ -61,108 +62,48 @@ $this->load->view('template/appAsset');
   <!-- <link rel="shortcut icon" href="favicon.png" type="image/x-icon"> -->
   <!-- <link rel="icon" href="favicon.png" type="image/x-icon"> -->
   <link rel="icon" href="<?= $this->config->item('css_images_js_base_url'); ?>images/favicon.ico" type="image/x-icon" />
-
+<script type="text/javascript">
+  var metas = document.getElementsByTagName('meta');
+  var i;
+  if (navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPad/i)) {
+    for (i=0; i<metas.length; i++) {
+      if (metas[i].name == "viewport") {
+        metas[i].content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
+      }
+    }
+    document.addEventListener("gesturestart", gestureStart, false);
+  }
+  function gestureStart() {
+    for (i=0; i<metas.length; i++) {
+      if (metas[i].name == "viewport") {
+        metas[i].content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
+      }
+    }
+  }
+</script>
 </head>
 
 <!-- Body -->
 <body>
   <div class="page-wrapper">
-    <div class="modal fade" id="quickPreview" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <button type="button" class="close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="modal-content">
-          <div class="row">
-            <div class="col-sm-7">
-              <a href="#img01"><img src="img/product-gallery/01.jpg" alt="Thumb"></a>
-            </div>
-            <div class="col-sm-5">
-              <div class="single-item-info">
-                <div class="item-logo">
-                  <img src="img/single-item-logo.png" alt="">
-                </div>
-                <div class="item-title">
-                  OVERSIZED DRESS
-                </div>
-                <div class="item-sku">
-                  Product Sku: 5110336
-                </div>
-                <div class="item-rating">
-                  <img src="img/rating.png" alt="">
-                  <span> (12 reviews)</span>
-                </div>
-                <div class="bages">
-                  <span class="bage">Sale 50%</span>
-                  <span class="bage bage-primary">New</span>
-                </div>
-                <div class="item-info">
-                  Eternity bands are a classy and stylish innovation to storm the market. These are often gifted for a marriage anniversary or at the time of giving birth to a child.
-                </div>
-                <div class="radio-group color">
-                  <div class="title">Choose Color</div>
-                  <span class="selected" style="background-color: #cabeae;"></span>
-                  <span style="background-color: #90b1db;"></span>
-                  <span style="background-color: #000;"></span>
-                </div>
-                <div class="radio-group size">
-                  <div class="title">Choose Size</div>
-                  <span>XXL</span>
-                  <span class="selected">XL</span>
-                  <span>L</span>
-                </div>
-                <div class="cost">
-                  $250 <span>$280</span>
-                </div>
-                <div class="action-tools">
-                  <div class="select inline margin-bottom-none">
-                    <select name="select">
-                      <option>Qty 11</option>
-                      <option>Qty 12</option>
-                      <option>Qty 13</option>
-                    </select>
-                  </div>
+    
+  <?=$this->load->view('//template/modal_fade',[
+      'title' => '',
+      'price' => '',
 
-                  <a href="#" class="btn btn-gray right-icon margin-bottom-none">Add To Cart <i class="material-icons shopping_cart"></i></a>
-
-                  <a href="#" class="btn btn-gray btn-iconed margin-bottom-none"><i class="material-icons favorite_border"></i></a>
-                </div>
-                <div class="category">Woman / Bodysuit</div>
-
-                <!-- Popular Tags -->
-                <div class="widget tags-list-widget">
-                  <div class="tags-list">
-                    <a href="#">Clothes</a>
-                    <a href="#">Boots</a>
-                    <a href="#">Skirts</a>
-                  </div>
-                </div><!-- Popular Tags END -->
-
-                <div class="social">
-                  <div class="title">Share product</div>
-
-                  <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-instagram"></i></a>
-                  <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-facebook"></i></a>
-                  <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-pinterest"></i></a>
-                  <a href="#" class="btn btn-gray btn-iconed"><i class="socicon-youtube"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- .modal-content -->
-      </div><!-- .modal-dialog -->
-    </div><!-- Modal END -->
+  ])?>
 
     <div off-canvas="id-1 left push" class="off-canvas-cont">
       <div class="side-nav-tools">
-        <a href="#">
-          <i class="material-icons language"></i>
+        <?php if(!$this->session->userdata('user_id')){ ?>
+        <a href="<?=base_url().'user/signin'?>">
+          <i class="material-icons person"></i>Login
         </a>
-        <a href="account-login.html">
-          <i class="material-icons person"></i>
+        <?php } else { ?>
+        <a href="<?=base_url().'user/account'?>">
+          <i class="material-icons person"></i>My Account
         </a>
-        <a href="#">
-          <i class="material-icons attach_money"></i>
-        </a>
-
+        <?php } ?>
         <a href="#" class="offcanvas-toggle inner-toggle">
           <i class="material-icons close"></i>
         </a>
@@ -172,9 +113,7 @@ $this->load->view('template/appAsset');
         <i class="icon material-icons search"></i>
         <form name="search" method="post" action="<?php echo base_url(); ?>product/search">
                   <input type="text" name="keyword" value="<?php if($this->session->userdata('keyword')){ echo $this->session->userdata('keyword'); } ?>" placeholder="Search entire store here..." class="form-control input-sm">
-                    <!-- <input type="image" class="" src="<?php echo $this->config->item('css_images_js_base_url'); ?>images/search-btn.png"> -->
                 </form>
-        <input type="text" class="form-control input-sm" placeholder="Search Shop">
       </div>
 
       <nav class="offcanvas-navigation" role="navigation" data-back-btn-text="Back">
@@ -189,18 +128,18 @@ $this->load->view('template/appAsset');
                       <ul class="sub-menu">
                       <?php foreach ($header_category_detail as $header_sub_category) { ?>
                         <li>
-                          <a href="blog-grid.html"><?= $header_sub_category->subcategory_title ?></a>
+                        <a href="<?=base_url()."product/category/".$header_sub_category->sub_cat_link_rewrite?>"><?=$header_sub_category->subcategory_title ?></a>
                         </li>
                       <?php } ?>
                       </ul>
                     </li>
                   <?php } ?>
                   <!-- Main Navigation Level -->
-            <li>
+            <!-- <li>
               <a href="<?= $this->config->item('site_url'); ?>" title="SALE">SALE</a>
-            </li>
+            </li> -->
             <li>
-              <a href="<?= $this->config->item('site_url'); ?>" title="BLOG">BLOG</a>
+              <a href="<?= base_url().'blog'; ?>" title="BLOG">BLOG</a>
             </li>
           </ul>
         </div>
@@ -225,14 +164,31 @@ $this->load->view('template/appAsset');
                 <a href="https://twitter.com/demodasecrets" class="social socicon-twitter"></a>
               </div>
               <div class="col-sm-4 text-right">
+                <?php if($this->session->userdata('user_id')){ ?>
                 <ul class="tools">
-                  <li>
-                    <a href="#">
-                      <i class="material-icons person"></i>
+                  <li class="dropdown">
+                    <a href="<?php echo base_url(); ?>user/account" <?php if($this->router->fetch_method() == 'account'){ echo 'class="active"'; } ?>>
                       <span class="hidden-md">My Account</span>
                     </a>
+                    <ul class="sub-menu">
+                        <li><a href="<?php echo base_url(); ?>user/account" <?php if($this->router->fetch_method() == 'account'){ echo 'class="active"'; } ?>>My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>user/wishlist" <?php if($this->router->fetch_method() == 'wishlist'){ echo 'class="active"'; } ?>>Wishlist</a></li>
+                        <li><a href="<?php echo base_url(); ?>user/orders" <?php if($this->router->fetch_method() == 'orders'){ echo 'class="active"'; } ?>>Orders</a></li>
+                        <li><a href="<?php echo base_url(); ?>user/cart" <?php if($this->router->fetch_method() == 'cart'){ echo 'class="active"'; } ?>>Cart</a></li>
+                        <li><a href="<?php echo base_url(); ?>user/checkout/" <?php if($this->router->fetch_method() == 'checkout'){ echo 'class="active"'; } ?>>Checkout</a></li>
+                        <li><a href="<?php echo base_url(); ?>user/logout">Logout</a></li>
+                    </ul>
                   </li>
                 </ul>
+                <?php } ?>
+                <div class="clearfix"></div>
+                <?php if(!$this->session->userdata('user_id')){ ?>
+                    <ul class="tools">
+                        <li><a href="<?php echo base_url(); ?>user/signup" <?php if($this->router->fetch_method() == 'signup'){ echo 'class="active"'; } ?>>Create Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>user/signin" <?php if($this->router->fetch_method() == 'signin'){ echo 'class="active"'; } ?>>Login</a></li>
+                    </ul>
+                    <?php }?>                    
+                    <div class="clearfix"></div>
               </div>
             </div>
           </div>
@@ -251,13 +207,14 @@ $this->load->view('template/appAsset');
                     <a href="<?= $this->config->item('site_url'); ?>" title="Home">Home</a>
                   </li><!-- Main Navigation Level END -->
 
-                  <?php foreach ($category as $header_category_detail) { ?>
+                  <?php //echo"<pre>";print_r($category)
+                  foreach ($category as $header_category_detail) { ?>
                     <li class="nav-item dropdown lvl-1">
                       <a href="#"><?=$header_category_detail[0]->category_title?></a>
                       <ul class="sub-menu">
                       <?php foreach ($header_category_detail as $header_sub_category) { ?>
                         <li class="nav-item lvl-2">
-                          <a href="blog-grid.html"><?=$header_sub_category->subcategory_title ?></a>
+                          <a href="<?=base_url()."product/category/".$header_sub_category->sub_cat_link_rewrite?>"><?=$header_sub_category->subcategory_title ?></a>
                         </li>
                       <?php } ?>
                       </ul>
@@ -265,7 +222,7 @@ $this->load->view('template/appAsset');
                   <?php } ?>
                   <!-- Main Navigation Level -->
                   <li class="nav-item lvl-1">
-                    <a href="<?= $this->config->item('site_url'); ?>" title="Blog">Blog</a>
+                    <a href="<?= base_url().'blog' ?>" title="Blog">Blog</a>
                   </li><!-- Main Navigation Level END -->
                   <!-- <li class="nav-item lvl-1 current">
                     <a href="<?= $this->config->item('site_url'); ?>" title="SALE">SALE</a>
@@ -274,7 +231,7 @@ $this->load->view('template/appAsset');
               </div> 
               <div class="column text-center">
                 <!-- Main Logo -->
-                <a href="index.html" class="logo">
+                <a href="<?=base_url()?>" class="logo">
                   <img src="img/logo.png" alt="">
                 </a><!-- Main Logo END -->
               </div>
@@ -284,75 +241,22 @@ $this->load->view('template/appAsset');
                 <div class="header-tools text-right">
                   <div class="widget search">
                     <i class="icon material-icons search"></i>
-                    <input type="text" class="form-control input-sm" placeholder="Search Shop">
+                     <form name="search" method="post" action="<?php echo base_url(); ?>product/search">
+                        <input type="text" name="keyword" value="<?php if($this->session->userdata('keyword')){ echo $this->session->userdata('keyword'); } ?>" placeholder="Search entire store here..." class="form-control input-sm">
+                        </form>
                   </div>
-
-                  <a href="account-wishlist.html" class="header-tools-link wishlist">
+                  <?php if($this->session->userdata('user_id')){ ?>
+                  <a href="<?=base_url().'user/wishlist'?>" class="header-tools-link wishlist">
                     <i class="material-icons favorite"></i>
                   </a>
+                  <?php } ?>
 
                   <!-- Cart dropdown element -->
-                  <div class="cart-container dropdown">
-                    <a href="#" class="header-tools-link cart-link">
+                  <div class="cart-container">
+                    <a href="<?=base_url().'user/cart'?>" class="header-tools-link cart-link">
                       <i class="material-icons shopping_cart"></i>
-                      <span class="counter">24</span>
+                      <span class="counter"><?=$total_cart_items?></span>
                     </a>
-
-                    <div class="sub-menu">
-                      <div class="widget cart-widget">
-                        <div class="widget-title">
-                          Latest Products
-                        </div>
-
-                        <ul class="cart-list">
-                          <!-- Cart List Item -->
-                          <li>
-                            <a href="product-gallery-left.html" class="cart-thumb">
-                              <img src="img/shop/cart-widget/01.jpg" alt="">
-                            </a>
-
-                            <div class="info-cont">
-                              <a href="product-gallery-left.html" class="item-title">SUEDE-EFFECT JACKET</a>
-
-                              <div class="category">
-                                Skirts
-
-                                <span class="cost">$ 140</span>
-                              </div>
-                            </div>
-                          </li><!-- Cart List Item END -->
-
-                          <!-- Cart List Item -->
-                          <li>
-                            <a href="product-gallery-left.html" class="cart-thumb">
-                              <img src="img/shop/cart-widget/02.jpg" alt="">
-                            </a>
-
-                            <div class="info-cont">
-                              <a href="product-gallery-left.html" class="item-title">SUEDE-EFFECT JACKET</a>
-
-                              <div class="category">
-                                Skirts
-
-                                <span class="cost">$140</span>
-                              </div>
-                            </div>
-                          </li><!-- Cart List Item END -->
-
-                          <!-- Cart Total -->
-                          <li>
-                            <div class="total">
-                              Total
-
-                              <div class="cost">$80 0000</div>
-                            </div>
-                          </li><!-- Cart Total END -->
-                        </ul>
-
-                        <a href="shopping-cart.html" class="btn btn-default btn-block margin-right-none">Go to cart</a>
-                        <a href="checkout-wizard.html" class="btn btn-default btn-block margin-right-none">Poceed to checkout</a>
-                      </div>
-                    </div>
                   </div><!-- Cart dropdown element END -->
                 </div>
               </div><!-- Header Tools END -->
@@ -369,21 +273,22 @@ $this->load->view('template/appAsset');
             </a>
 
             <!-- Mobile View Logo -->
-            <a href="index.html" class="logo">
+            <a href="<?=base_url()?>" class="logo">
               <img src="img/logo.png" alt="">
             </a>
 
             <div class="mobile-tools">
               <!-- Wishlist Link -->
-              <a href="account-wishlist.html" class="wishlist">
+              <?php if($this->session->userdata('user_id')){ ?>
+              <a href="<?=base_url().'user/wishlist'?>" class="wishlist">
                 <i class="material-icons favorite"></i>
               </a>
-
+              <?php } ?>
               <!-- Cart dropdown element -->
               <div class="cart-container">
-                <a href="shopping-cart.html" class="cart-link">
+                <a href="<?=base_url().'user/cart'?>" class="cart-link">
                   <i class="material-icons shopping_cart"></i>
-                  <span class="counter">24</span>
+                  <span class="counter"><?=$total_cart_items?></span>
                 </a>
               </div>
             </div>

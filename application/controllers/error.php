@@ -20,12 +20,25 @@ class Error extends CI_Controller {
             parent::__construct();
      }
 	   
+	public function index()
+	{
+		$cart_details = $this->Usermodel->total_order_amount();		
+		$data['total_cart_items'] = $cart_details['total_cart_items'];
+		$data['total_amount'] = $cart_details['total_amount'];
 		
+		// categories & subcategories
+		$data['header_categories'] = $this->Productmodel->getAllCategories();
+		$this->load->view('template/header_new',$data);
+		$this->load->view('home/static-page',$data);
+		$this->load->view('template/footer_new');
+	}
+
 	public function fourOfour()
 	{	
-		$this->load->view('template/header',$data);
+
+		$this->load->view('template/header_new',$data);
 		$this->load->view('home/static-page',$data);
-		$this->load->view('template/footer');
+		$this->load->view('template/footer_new');
 		
 	}
 	

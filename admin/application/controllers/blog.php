@@ -113,7 +113,7 @@ class Blog extends CI_Controller {
 	
 		// check user is loggedin or not
 		$this->Usermodel->isLoggedIn();
-		
+		// echo"<pre>";print_r([$_POST, $_FILES]);die;
 		$this->Blogmodel->saveBlogData($_POST, $_FILES);
 		
 		$id = $_POST['id']; // category id

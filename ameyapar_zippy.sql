@@ -212,8 +212,8 @@ CREATE TABLE IF NOT EXISTS `mail_content` (
 --
 
 INSERT INTO `mail_content` (`id`, `comment`, `content`) VALUES
-(1, 'Invoice mail to buyer', 'Thank you for shopping with ZPLOFT.'),
-(2, 'Invoice mail to ZPLOFT', '<p>Product sold invoice<br></p>\r\n'),
+(1, 'Invoice mail to buyer', 'Thank you for shopping with Demoda.'),
+(2, 'Invoice mail to Demoda', '<p>Product sold invoice<br></p>\r\n'),
 (3, 'Invoice mail to Vendor', '<p>Product has been sold. Details are given below : <br></p>');
 
 -- --------------------------------------------------------

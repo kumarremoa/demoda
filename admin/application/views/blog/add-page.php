@@ -68,14 +68,26 @@ $r(document).ready(
                 <div class="control-group">
                     <label class="control-label">Content</label>
                     <div class="controls">
-                    <textarea name="content" id="redactor" cols="500" rows="10"></textarea>                                 
+                    <textarea name="content" id="redactor" cols="500" rows="500" style="width: 637px; height: 600px;"></textarea>                                 
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Status</label>
+                    <div class="controls">
+                    <select name="status" required="required">
+                        <option disabled="disabled" value="" selected="selected">-Select-</option>
+                        <option value="0">Inactive</option>
+                        <option value="1">Active</option>
+                        <option value="2">Deleted</option>
+                    </select>                                                  
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label">Cover Image<span class="f_req">*</span></label>
                     <div data-fileupload="file" class="controls fileupload fileupload-new">
-                        <input type="file" name="image_path" required="required" />
+                        <input type="file" name="image_path[]" required="required" multiple="multiple" />
                     </div>                          
                 </div>
                                     

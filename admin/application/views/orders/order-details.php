@@ -56,7 +56,7 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Size</th>
-                                    <th>ZPLOFT Price</th>
+                                    <th>Demoda Price</th>
                                     <th>Discount Price</th>
                                     <th>Quantity</th>
                                     <th>Amount</th>

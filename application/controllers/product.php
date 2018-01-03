@@ -39,17 +39,17 @@ class Product extends CI_Controller {
 		
 	}
 	
-	public function description($product_id)
+	public function description($link_rewrite)
 	{
 		//echo $product_id;
 		
-		$data['product_details'] = $this->Productmodel->getDetails($product_id);
+		$data['product_details'] = $this->Productmodel->getDetails($link_rewrite);
 		
 		// user wishlist product ids
 		$data['wishlist_product_ids'] = $this->Usermodel->getWishlistProductIds();
 		
 		// related products
-		$data['related_products'] = $this->Productmodel->getRelatedProducts($product_id);
+		$data['related_products'] = $this->Productmodel->getRelatedProducts($link_rewrite);
 		
 		// total ordered amount
 		$cart_details = $this->Usermodel->total_order_amount();		
@@ -58,10 +58,10 @@ class Product extends CI_Controller {
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
-								
-		$this->load->view('template/header',$data);
+		// echo "<pre>";print_r($data);die;
+		$this->load->view('template/header_new',$data);
 		$this->load->view('product/description',$data);
-		$this->load->view('template/footer');		
+		$this->load->view('template/footer_new');		
 	}
 	
 	
@@ -160,7 +160,79 @@ class Product extends CI_Controller {
 	
 	
 	// list products by category
-	function category($category_id)
+	function category($cat_link_rewrite)
+	{	
+		// print_r($this);die;
+		$subCatData = $this->Productmodel->getSubCatData($cat_link_rewrite);
+		if(isset($_POST['short_by']) || isset($_POST['per_page']))
+		{
+			$this->session->set_userdata('short_by',$_POST['short_by']);
+			$this->session->set_userdata('per_page',$_POST['per_page']);		
+		}
+		else if(!$this->session->userdata('per_page'))
+		{
+			$this->session->unset_userdata('short_by');
+			$this->session->unset_userdata('per_page');
+		}
+		
+		// pagination
+		// http://ellislab.com/codeigniter/user-guide/libraries/pagination.html
+		
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'product/category/'.$cat_link_rewrite;
+		$config['total_rows'] = $this->Productmodel->total_category_products($subCatData->id); // total records to paginate
+		$config['per_page'] = ($this->session->userdata('per_page')) ? $this->session->userdata('per_page') : 12;
+		$config['uri_segment'] = 4;
+		//$config['num_links'] = 1;
+		$config['use_page_numbers'] = TRUE;
+		$config['first_tag_open'] = '<span class="page_nav_first">';
+		$config['first_tag_close'] = '</span>';
+		$config['last_tag_open'] = '<span class="page_nav_last">';
+		$config['last_tag_close'] = '</span>';
+		
+		
+		$this->pagination->initialize($config);		
+		
+		$page = ($this->uri->segment(4) != '') ? $this->uri->segment(4) : 0;	// current page	
+		$start = ($page > 0) ? (($page-1)*$config['per_page']) : 0;
+		
+		$data['results'] = $this->Productmodel->product_by_category($subCatData->id,$config['per_page'],$start); // paginated records
+		
+		
+        $data['links'] = $this->pagination->create_links();
+		
+		// end pagination
+			
+		$data['total_results_found'] = $config['total_rows'];
+		
+		// get category name
+		$data['category_bread_crumb'] = $this->Productmodel->getCategoryName($subCatData->id);
+		
+		// user wishlist product ids
+		$data['wishlist_product_ids'] = $this->Usermodel->getWishlistProductIds();
+		
+		// total ordered amount
+		$cart_details = $this->Usermodel->total_order_amount();		
+		$data['total_cart_items'] = $cart_details['total_cart_items'];
+		$data['total_amount'] = $cart_details['total_amount'];
+		
+		// categories & subcategories
+		$data['header_categories'] = $this->Productmodel->getAllCategories();
+		$priceRange = $this->minPriceByResult($data['results']);
+		$params = [
+		'priceRange' => $priceRange,
+		'results' => $data['results'],
+		];
+		$this->load->model('Seomodel');
+		$data['seoData'] = $this->Seomodel->getSeoData($params,'category','nightware');
+
+								
+		$this->load->view('template/header',$data);
+		$this->load->view('product/category-products',$data);
+		$this->load->view('template/footer');
+	}
+
+	function fullCategory($category_id)
 	{	
 		// print_r($this);die;
 	

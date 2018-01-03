@@ -2,16 +2,15 @@
 
 <!-- inner page content -->
 <div class="mid"> 
-    <div class="content">
+    <div class="container">
         <div class="heading-sec">
             <div class="headng">
-                <h4>Orders</h4>
+                <h1>Orders</h1>
             </div>
             <div class="clr"></div>
         </div>
         
         <div class="inner_page">
-        	<div class="tabl-responsive">
         <?php
 			
 			if(!$orders)
@@ -20,7 +19,7 @@
 			}
 			else
 			{
-				echo '<table class="list_orders" cellpadding="0" cellspacing="0">
+				echo '<table class="table-responsive" cellpadding="0" cellspacing="0">
 						<tr>
 							<th>Sr. No.</th>
 							<th>Order No.</th>
@@ -54,8 +53,7 @@
 			
 		?>
         
-           <div><?php echo $links; ?></div>   
-           </div>   
+           <div><?php echo $links; ?></div>      
         </div>
     </div>
 

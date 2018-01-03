@@ -27,8 +27,8 @@
 					//$thumb_image = $this->config->item('site_url').'uploads/featured_categories/'.$category_details[0]->thumb_image;
 					//$banner_image = $this->config->item('site_url').'uploads/featured_categories/'.$category_details[0]->banner_image;
 					$is_active = $category_details[0]->active;
-					$seo_title = $category_details[0]->seo_title;
-					$seo_description = $category_details[0]->seo_description;
+					// $seo_title = $category_details[0]->seo_title;
+					// $seo_description = $category_details[0]->seo_description;
 	
 					?>
 					<nav>
@@ -76,7 +76,7 @@
 								</div>							
 							</div>
 							
-							<div class="control-group">
+							<!-- <div class="control-group">
 								<label class="control-label">SEO Title<span class="f_req">*</span></label>
 								<div class="controls">
 									<input type="text" name="seo_title" value="<?php echo $seo_title; ?>" required="required"  />
@@ -90,7 +90,7 @@
 									<input type="text" name="seo_description" value="<?php echo $seo_description; ?>" required="required"  />
 															
 								</div>							
-							</div>
+							</div> -->
 							
 								<div class="control-group">
 								<label class="control-label">Status<span class="f_req">*</span></label>

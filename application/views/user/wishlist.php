@@ -1,5 +1,5 @@
 <!-- inner page content -->
-
+<?php /*
 <div class="main-contnt">
         	<div class="row">
             	
@@ -129,3 +129,96 @@
         </div>
 
 <!-- end inner page content -->
+*/?>
+      <main>
+        <div class="page-title">
+          <div class="container">
+            <div class="breadcrumbs">
+              <a href="<?=base_url()?>">Home</a>
+              <span class="delimiter"><i class="material-icons keyboard_arrow_right"></i></span>
+              <span>Shop</span>
+            </div>
+
+            <h1 class="title pull-right">Wishlist</h1>
+          </div>
+        </div>
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-9">
+            <div class="row">
+            <?php $i=0; 
+            foreach($user_wishlist as $productDetail)
+								{
+									$price = ($productDetail->is_discount == 1) ? '<span>₹'.$productDetail->price.'</span> ₹'.number_format($productDetail->price - $productDetail->discount_price , 2) : '₹'.$productDetail->price;
+										
+									$file_name = explode('.',$productDetail->file_name);												
+									$file_ext = array_pop($file_name);												
+									$thumb_name = implode('.',$file_name).'_thumb.'.$file_ext;
+									
+									$product_image = $this->config->item('site_url').'admin/uploads/products/medium/'.$thumb_name;
+									$description = (strlen(strip_tags($productDetail->description)) > 200) ? substr($productDetail->description,0,200).'...' : $productDetail->description;
+								?>
+                <div class="col-md-4">
+                  <div class="tile">
+                    <div class="preview-box">
+                      <div class="preview-carousel" data-slick='{arrows": true, "dots": false}'>
+                        <img src="<?=$product_image?>" alt="<?=$productDetail->title?>">
+                      </div>
+                    </div>
+
+                    <div class="tile-title">
+                      <a href="<?= product_url($productDetail)?>"><?=ucwords($productDetail->title) ?></a>
+                    </div>
+
+                    <div class="tile-meta">
+                      <div class="meta-top">
+                        <span class="cost"><?=$price?></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <?php /*echo $i % 3 == 0 ? '</div>' : '';*/ }?>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+              <aside class="sidebar">
+                <div class="widget cart-widget">
+                  <div class="widget-title">
+                    Featured Products
+                  </div>
+
+                  <ul class="cart-list">
+                    <?php foreach ($featuredProductDetails as $key => $productDetail){ 
+                    $price = ($productDetail->is_discount == 1) ? '₹'.number_format($productDetail->price - $productDetail->discount_price , 2) : '₹'.$productDetail->price;
+                        $file_name = explode('.',$productDetail->file_name);
+                        $file_ext = array_pop($file_name);                        
+                        $thumb_name = implode('.',$file_name).'_thumb.'.$file_ext;
+                        
+                        $product_image = $this->config->item('site_url').'admin/uploads/products/small/'.$thumb_name;
+
+                    ?>
+                    <li>
+                      <a href="<?=product_url($productDetail)?>" class="cart-thumb">
+                        <img src="<?=$product_image ?>" alt="<?=$productDetail->title ?>">
+                      </a>
+
+                      <div class="info-cont">
+                        <a href="<?=product_url($productDetail)?>" class="item-title"><?=ucwords($productDetail->title)?></a>
+
+                        <div class="category">
+                          <?= $productDetail->sub_category_title?>
+
+                          <span class="cost"><?=$price ?></span>
+                        </div>
+                      </div>
+                    </li>
+                    <?php } ?>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </main>

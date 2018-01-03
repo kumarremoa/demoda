@@ -45,7 +45,7 @@
 		</div>							
 	</div>
 
-	<div class="control-group">
+	<!-- <div class="control-group">
 		<label class="control-label">SEO Title<span class="f_req">*</span></label>
 		<div class="controls">
 			<input type="text" name="seo_title" required="required"  />
@@ -60,7 +60,7 @@
 									
 		</div>							
 	</div>
-																
+ -->																
 	<button class="btn" type="submit">Add Category</button>
 	
 	</form>

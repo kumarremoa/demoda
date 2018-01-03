@@ -96,7 +96,7 @@ $total_results = $total_results_found;
 										{
 											echo '<div class="products_list">
 													<div class="row">
-														<div class="col-sm-5"><a href="'.base_url().'product/description/'.$productDetail->product_id.'"><img src="'.$product_image.'" /></a></div>
+														<div class="col-sm-5"><a href="'.product_url($productDetail).'"><img src="'.$product_image.'" /></a></div>
 														<div class="col-sm-7">
 														 <h2>'.ucwords($productDetail->title).'</h2>
 														   <div class="price">'.$price.' </div>
@@ -110,7 +110,7 @@ $total_results = $total_results_found;
 										{
 											echo '<div class="col-sm-4">
 													<div class="product-box">
-														<a href="'.base_url().'product/description/'.$productDetail->product_id.'"><img src="'.$product_image.'" alt=""></a>
+														<a href="'.product_url($productDetail).'"><img src="'.$product_image.'" alt=""></a>
 														<div class="pro_details">
 															<div class="price"><!--<span>$80.00</span>--> '.$price.' </div>
 															<p>'.ucwords($productDetail->title).'<!--<br />

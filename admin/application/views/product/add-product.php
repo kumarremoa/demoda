@@ -284,11 +284,11 @@ $r(document).ready(
 								</div>							
 							</div>
                             
-                            <div class="control-group">
+              <div class="control-group">
 								<label class="control-label">Featured<span class="f_req">*</span></label>
 								<div class="controls">
 									<input type="radio" name="is_featured" value="1" title="Yes" /> Yes<br />
-                                    <input type="radio" name="is_featured" value="0" title="No" checked="checked" /> No
+                  <input type="radio" name="is_featured" value="0" title="No" checked="checked" /> No
 								</div>							
 							</div>
                             

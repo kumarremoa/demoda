@@ -19,10 +19,10 @@
 ?>
     <!-- inner page content -->
     <div class="mid"> 
-        <div class="content">
+        <div class="container">
             <div class="heading-sec">
                 <div class="headng">
-                    <h4>Account</h4>
+                    <h1>Account</h1>
                 </div>
                 <div class="clr"></div>
             </div>

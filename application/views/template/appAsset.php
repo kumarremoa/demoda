@@ -3,7 +3,19 @@
 $controller_name = $this->router->fetch_class();
 $action = $this->router->fetch_method();
 
-$_common_css = [];
+$_common_css = [
+	"css/vendor/socicon.min.css",
+		"css/vendor/material-icons.min.css",
+		"css/vendor/bootstrap.min.css",
+		"css/vendor/slick.css",
+		"css/vendor/magnific-popup.css",
+		"css/vendor/slidebars.min.css",
+		"css/vendor/layers.css",
+		"css/vendor/settings.css",
+		"css/vendor/navigation.css",
+		"css/theme.min.css",
+		"css/custom.css",
+];
 $_custom_css  = [
 	"home" => [
 		"css/vendor/socicon.min.css",
@@ -26,12 +38,12 @@ $_custom_css  = [
 		"css/vendor/magnific-popup.css",
 		"css/vendor/slidebars.min.css",
 		"css/theme.min.css",
-		"stylesheets/vendor/socicon.min.css",
-		"stylesheets/vendor/material-icons.min.css",
-		"stylesheets/theme.min.css",
-		
-
+		"css/custom.css",
 	],
+	'user' => [
+		'css/user.css',
+		"css/theme.min.css",
+	]
 
 ];
 
@@ -54,9 +66,16 @@ $_custom_js = [
 		"js/vendor/velocity.min.js",
 		"js/vendor/slidebars.min.js",
 		"js/vendor/jquery.themepunch.revolution.min.js",
-	]
+		"js/functions.js",
+	],
+	'user' => [],
 ];
-$_common_js = [];
+$_common_js = [
+	"js/vendor/jquery-2.1.4.min.js",
+	"js/functions.js",
+
+
+];
 if (isset($_custom_js["$controller_name/$action"])) {
     $_common_js = array_merge($_common_js, $_custom_js["$controller_name/$action"]);
     $_common_css = array_merge($_common_css, $_custom_css["$controller_name/$action"]);
@@ -66,9 +85,10 @@ if (isset($_custom_js["$controller_name"])) {
     $_common_js = array_merge($_common_js, $_custom_js["$controller_name"]);
     $_common_css = array_merge($_common_css, $_custom_css["$controller_name"]);
 }
-
+$_common_js = array_unique($_common_js);
+$_common_css = array_unique($_common_css);
 foreach ($_common_css as $value) { ?>
-	<link href="<?= $this->config->item('css_images_js_base_url').$value ?>" rel="stylesheet" type="text/css" media="all" />	
+	<link href="<?= $this->config->item('css_images_js_base_url').$value ?>" rel="stylesheet" type="text/css" media="screen" />	
 <?php } 
 
 foreach ($_common_js as $value) { ?>

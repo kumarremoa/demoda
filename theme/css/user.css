@@ -1,0 +1,257 @@
+input[type="submit"]{ background:inherit; display:block; text-transform:uppercase; float:left; font-size:20px; color:#fff; cursor:pointer; border:none;}
+.clr{clear:both;}
+.product-details .size a.selected_size{ background:#FF6E6B; color:#fff;}
+.product-details .colour a.selected_color{ border:1px solid #FF6E6B; box-shadow:0 0 2px #aaa; -webkit-box-shadow:0 0 2px #aaa;}
+.card_details{display:none;}
+
+
+/* signup css starts here  */
+
+#section_signin h1, #section_signup h1 {
+	text-align:center;
+	color:#323232;
+	font-size:35px;
+	font-weight:normal;
+	margin:15px 0
+}
+#section_signup, #section_signin {
+	background:url(../images/sign_section_bg.png) no-repeat center bottom;
+	width:871px;
+	margin:0 auto 10px
+}
+#section_signup a, #section_signin a {
+	color:#30b6ff
+}
+.clsSign_Top {
+	background:#f8f8f8!important;
+	margin:0 auto;
+	min-height:380px;
+	width:505px;
+	padding:15px 20px 0 20px
+}
+.Sign_Or_Row {
+    background: url("../images/sign_border.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    height: 40px;
+    line-height: 37px;
+}
+.sign-fb-my-account {
+	text-align:center;
+	color:#444
+}
+.sign-fb-my-account a.Sign_Fb_Bg {
+	background:url(../images/facebook.png) no-repeat center top;
+	display:block;
+	height:40px;
+	width:295px;
+	text-indent:-2000px;
+	margin:10px auto
+}
+.sign-fb-my-account a.Sign_Fb_Bg:hover {
+	background:url(../images/facebook_hover.png) no-repeat center top;
+	width:295px
+}
+.sign-fb-my-account a.Sign_up_Fb_Bg {
+	background:url(../images/facebook_up.png) no-repeat center top;
+	display:block;
+	height:40px;
+	width:295px;
+	text-indent:-2000px;
+	margin:10px auto
+}
+.sign-fb-my-account a.Sign_up_Fb_Bg:hover {
+	background:url(../images/facebook_up_hover.png) no-repeat center top;
+	width:295px
+}
+
+.sign-fb-my-account a.Sign_in_Fb_Bg {
+	background:url(../images/facebook_login.png) no-repeat center top;
+	display:block;
+	height:40px;
+	width:295px;
+	text-indent:-2000px;
+	margin:10px auto
+}
+.sign-fb-my-account a.Sign_in_Fb_Bg:hover {
+	background:url(../images/facebook_login_hover.png) no-repeat center top;
+	width:295px
+}
+
+.Txt_input {
+	position:relative;
+	-webkit-box-shadow:inset #f9f9f9 5px 7px 5px;
+	-moz-box-shadow:inset #f9f9f9 5px 7px 5px;
+	box-shadow:inset #f9f9f9 5px 7px 5px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+	border:2px solid #f0f0f0;
+	padding:0 10px;
+	margin:0 0 10px 0
+}
+.Txt_input input {
+	width:405px;
+	background:#fff;
+	border:0;
+	color:#767676;
+	padding:12px 0;
+	border-radius:0;
+	box-shadow: 0px 0px 0px transparent;
+}
+#Input_Mail.Txt_input {
+	background:#fff url(../images/sign_up_icons.png) no-repeat 98% -216px
+}
+#Input_Mail.Txt_input:hover {
+	background:#fff url(../images/sign_up_icons.png) no-repeat 98% -50px
+}
+#Input_Password.Txt_input {
+	background:#fff url(../images/sign_up_icons.png) no-repeat 98% -282px
+}
+#Input_Password.Txt_input:hover {
+	background:#fff url(../images/sign_up_icons.png) no-repeat 98% -116px
+}
+#Input_First.Txt_input, #Input_Last.Txt_input, #Input_User.Txt_input {
+	background:#fff url(../images/sign_up_icons.png) no-repeat 98% -155px
+}
+#Input_First.Txt_input:hover, #Input_Last.Txt_input:hover, #Input_User.Txt_input:hover {
+	background:#fff url(../images/sign_up_icons.png) no-repeat 98% 11px
+}
+.Txt_input .labelBlur {
+	position:absolute;
+	padding:12px 0
+}
+.clsSign_Email p {
+	padding:0 0 10px 0;
+	color:red
+}
+clsSign_Email .Sign_Reminder_Me {
+	margin:0 0 0 15px
+}
+
+.sign-fb-my-account a.sign_tw_bg {
+	background:url(../images/twitter.png) no-repeat scroll 0 0;
+	height:40px;
+	display:block;
+	width:294px;
+	line-height:5;
+	margin:0 auto
+}
+.sign-fb-my-account a.sign_tw_bg:hover {
+	background:url(../images/twitter_up_hover.png) no-repeat scroll 0 0;
+	height:40px;
+	width:294px;
+	line-height:5
+}
+.sign-fb-my-account a.sign_up_tw_bg {
+	background:url(../images/twitter_up.png) no-repeat scroll 0 0;
+	height:40px;
+	display:block;
+	width:294px;
+	line-height:5;
+	margin:0 auto
+}
+.sign-fb-my-account a.sign_up_tw_bg:hover {
+	background:url(../images/twitter_up_hover.png) no-repeat scroll 0 0;
+	height:40px;
+	width:294px;
+	line-height:5
+}
+
+.sign-fb-my-account a.sign_in_tw_bg {
+	background:url(../images/twitter_login.png) no-repeat scroll 0 0;
+	height:40px;
+	display:block;
+	width:294px;
+	line-height:5;
+	margin:0 auto
+}
+.sign-fb-my-account a.sign_in_tw_bg:hover {
+	background:url(../images/twitter_login_hover.png) no-repeat scroll 0 0;
+	height:40px;
+	width:294px;
+	line-height:5
+}
+
+.sign-fb-my-account a.sign_google_bg:hover {
+	background:url(../images/signin_with_google_hv.png) no-repeat scroll 0 0;
+	height:40px;
+	width:294px;
+	line-height:5
+}
+.sign-fb-my-account a.sign_google_bg {
+	background:url(../images/signin_with_google.png) no-repeat scroll 0 0;
+	height:40px;
+	display:block;
+	width:294px;
+	line-height:5;
+	margin:0 auto
+}
+.sign-fb-my-account a.sign_up_google_bg:hover {
+	background:url(../images/google_up_hover.png) no-repeat scroll 0 0;
+	height:40px;
+	width:294px;
+	line-height:5
+}
+.sign-fb-my-account p.twitterp {
+	padding:20px 0
+}
+.sign-fb-my-account a.sign_gp_bg {
+	background:url(../images/google.png) no-repeat scroll 0 0;
+	height:46px;
+	width:247px;
+	line-height:5;
+	padding:16px 126px
+}
+.sign-fb-my-account a.sign_gp_bg:hover {
+	background:url(../images/google_hover.png) no-repeat scroll 0 0;
+	height:46px;
+	width:247px;
+	line-height:5;
+	padding:16px 126px
+}
+.sign-fb-my-account p.gplusp {
+	padding:20px 0
+}
+.clsSign_Email p .Sign_Reminder_HelveticaNeueMe {
+	color:#767676
+}
+.create_acc  {
+	margin:0;
+	padding:0;
+	font-size:19px;
+	color:#444;
+}
+.create_acc a {
+	margin:0;
+	padding:0;
+	font-size:19px;
+	color:#30b6ff;
+	text-decoration:none;
+}
+.create_acc a:hover{
+	text-decoration:underline;
+}
+
+.gotomsg {
+    padding: 5px 13px;
+    text-transform: uppercase;
+}
+
+.blue:hover, .blue.hover {
+    background-image: -moz-linear-gradient(center top , #33BEFF 0px, #018FE1 100%);
+    color: #FFFFFF;
+}
+
+/*checkout page css*/
+
+.mid .content .heading-sec .headng h4{ font-size:24px; padding-top:10px; color:#FF6E6B }
+.chkout-page .col-sm-6 label.control-label{ width:150px; float:left; display:block; margin-right:15px; font-size:16px; font-weight:normal;}
+.chkout-page .col-sm-6 input{ background:#fff; border:solid 1px #e0e0e0; padding:7px 10px; margin:7px 0; width:68%;}
+.chkout-page .col-sm-6 input[type="radio"]{ width:auto; float:left; margin-right:7px; margin-bottom:10px; display:block;}
+.chkout-page .col-sm-6 .radio_sec{ float:left; margin-right:15px; margin-top:10px;}
+.chkout-page .col-sm-6 span{ display:block; float:left; padding-top:6px;}
+.chkout-page .col-sm-6 span.red{ display:inline-block; float:none;}
+.mid.checkout {
+    margin: 35px 0 0 0;
+}
+
