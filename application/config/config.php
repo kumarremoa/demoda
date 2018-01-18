@@ -16,6 +16,7 @@
 */
 
 //$config['base_url']	= '';
+//$config['base_url']	= "/demoda/demoda.git/index.php/";
 $config['base_url']	= "/demoda/demoda.git/index.php/";
 $config['site_url']	= "http://".$_SERVER['HTTP_HOST']."/demoda/demoda.git/";
 $config['css_images_js_base_url']	= $config['site_url']."theme/";

@@ -31,9 +31,19 @@ class Bannermodel extends CI_Model {
 		
 		//print_r($data);
 	
-		$this->db->insert('slider_images', $data);
+		//$this->db->insert('slider_images', $data);
 		
 		return $file_name;
+	}
+
+	public function saveBanner($data, $image)
+	{
+		 // echo "<pre>";
+		 $data['image'] = $image;
+		 // print_r($data);die;
+		 $this->db->insert('slider_images', $data);
+
+		  return;
 	}
 	
 	

@@ -41,7 +41,7 @@
 $route = [
 	'home' => 'home/index',
 	//'user/(:any)/(:num)' => 'home/user/$1/$2',//for routing url
-
+	'product/category/find-(:any)-(:any)-to-(:any)' => "product/category/$1/$2/$3",
 	'default_controller' => "home",
 	'404_override' => 'error/index',
 	'about-us' => "home/page/1",
@@ -57,6 +57,7 @@ $route = [
 	'blog' => "blog/index",
 	'blog/(:num)' => "blog/index/$1",
 	'blog/(:any)' => "blog/detail/$1",
+
 
 ];
 

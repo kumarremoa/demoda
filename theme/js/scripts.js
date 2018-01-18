@@ -108,18 +108,18 @@ jQuery(document).ready(function($) {
 	if($('.slider-margin').length > 0) {
 		var marginSlider = document.getElementById('slider-margin');
 		noUiSlider.create(marginSlider, {
-			start: [ 120, 800 ],
+			start: [ 300, 8000 ],
 			margin: 1,
 			step: 1,
 			connect: true,
 			range: {
 				'min': 0,
-				'max': 1000
+				'max': 10000
 			},
 			format: wNumb({
 				decimals: 0,
-				thousand: '.',
-				prefix: '$',
+				// thousand: '.',
+				prefix: '₹',
 			})
 		});
 	}

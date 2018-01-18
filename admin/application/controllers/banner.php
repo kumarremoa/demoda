@@ -56,6 +56,7 @@ class Banner extends CI_Controller {
 		$this->Usermodel->isLoggedIn();
 		
 		$file_name = $this->Bannermodel->saveBannerData($_FILES);
+		$this->Bannermodel->saveBanner($_POST,$file_name);
 		
 		
 		// resize image

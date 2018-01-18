@@ -1,5 +1,5 @@
 <?php
-
+/*
 $total_results = $total_results_found;
 //echo '<pre>'; print_r($category_bread_crumb); echo '</pre>'; 
 ?>
@@ -140,4 +140,186 @@ $total_results = $total_results_found;
                 </div>
             </div>
         </div>
+<!-- end inner page content
+*/?>
+
+      <main>
+        <!-- Page Title -->
+        <div class="page-title">
+          <div class="container">
+            <div class="breadcrumbs">
+              <a href="<?=base_url()?>">Home</a>
+              <span class="delimiter"><i class="material-icons keyboard_arrow_right"></i></span>
+              <a href="<?= '' ?>"><?= ucwords($category_bread_crumb->parent_category_title) ?></a>
+              <span class="delimiter"><i class="material-icons keyboard_arrow_right"></i></span>
+              <span><?= ucwords($category_bread_crumb->sub_category_title) ?></span>
+            </div>
+            <h1 class="title pull-right"><?=ucwords($category_bread_crumb->sub_category_title)?></h1>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-md-push-3">
+
+              
+              <div class="shop-grid-tools">
+                <span class="count-info"><?=count($results) ?> items found</span>
+                <div class="select order-sorting">
+                <form method="post" action="<?php echo base_url() ?>product/category/<?php echo $this->uri->segment(3); ?>">
+                  <select name="short_by" onchange="this.form.submit()">
+                    <option value="latest" <?php if($this->session->userdata('short_by') == 'latest'){ echo 'selected="selected"'; } ?>>Sort By Arrival</option>
+                    <option value="price" <?php if($this->session->userdata('short_by') == 'price'){ echo 'selected="selected"'; } ?>>Sort By Price</option>
+                  </select>
+                  </form>    
+                </div>
+              </div>
+
+              <div class="row">
+              <?php foreach($results as $productDetail) { 
+              	$price = ($productDetail->is_discount == 1) ? '<span>₹'.$productDetail->price.'</span> ₹'.number_format($productDetail->price - $productDetail->discount_price , 2) : '₹'.$productDetail->price;
+				        $file_name = explode('.',$productDetail->file_name);
+				        $file_ext = array_pop($file_name);                        
+				        $thumb_name = implode('.',$file_name).'_thumb.'.$file_ext;
+				        
+				        $product_image = $this->config->item('site_url').'admin/uploads/products/medium/'.$thumb_name;
+
+				    ?>
+                <div class="col-md-4">
+                  <div class="tile">
+                    <div class="preview-box">
+                      <div class="preview-carousel" data-slick='{"arrows": false, "dots": true}'>
+                        <img src="<?=$product_image?>" alt="<?=$productDetail->title?>">
+                      </div>
+                    </div>
+
+                    <div class="tile-title">
+                      <a href="<?= product_url($productDetail)?>"><?=$productDetail->title ?></a>
+                    </div>
+
+                    <div class="tile-meta">
+                      <div class="meta-top">
+                        <a href="<?=sub_category_url($productDetail) ?>" class="category"><?=$productDetail->sub_category_title ?></a>
+                        <span class="cost"><?= $price ?></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <?php } ?>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-md-pull-9">
+              <aside class="sidebar">
+                <div class="widget search">
+	                <form name="search" method="post" action="<?php echo base_url(); ?>product/search">
+	        				<i class="icon material-icons search"></i>
+	                <input type="text" name="keyword" placeholder="Search entire store here..." class="form-control input-sm">
+	                </form>
+                </div>
+
+                <?php $this->load->view('template/sidebar',$header_categories); ?>
+
+                <div class="widget widget-range-slider range-slider-container">
+                  <div class="widget-title">
+                    Filters
+                  </div>
+                  <div id="slider-margin" class="slider-margin" name="price_margin"></div>
+                  <span>Price Range</span>
+                  <span class="example-val" id="slider-margin-value-min" name="min_price"></span> -
+                  <span class="example-val" id="slider-margin-value-max" name="max_price"></span>
+
+                  <button onclick="priceFilter('<?=$currentProduct->sub_cat_link_rewrite ?>')" class="btn btn-default btn-xs pull-right">Fliter </button>
+                </div>
+                <div class="widget tags-list-widget">
+                  <div class="widget-title">
+                   Popular Tags
+                  </div>
+
+                  <div class="tags-list">
+                    <a href="#">Clothes</a>
+                    <a href="#">Boots</a>
+                    <a href="#">Skirts</a>
+                  </div>
+                </div>
+
+                <?php 
+                /*$this->load->view('template/sidebar',[
+                    'header_categories' => $header_categories, 
+                    'checkbox' => true,
+                ]);*/ ?>
+                <div class="widget categories-widget">
+                  <div class="widget-title">
+                    Choose Size
+                  </div>
+
+                  <ul class="cat-list">
+                  <form action="" method="post">
+                    <li>
+                      <label class="checkbox">
+                        <input onchange="this.form.submit()" type="checkbox" name="s" <?=($this->session->userdata('s') == 'on') ? 'checked' : '' ?>> S
+                      </label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input onchange="this.form.submit()" type="checkbox" name="m" <?=($this->session->userdata('m') == 'on') ? 'checked' : '' ?>> M
+                      </label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input onchange="this.form.submit()" type="checkbox" name="l" <?=($this->session->userdata('l') == 'on') ? 'checked' : '' ?>> L
+                      </label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input onchange="this.form.submit()" type="checkbox" name="xl" <?=($this->session->userdata('xl') == 'on') ? 'checked' : '' ?>> XL
+                      </label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input onchange="this.form.submit()" type="checkbox" name="xxl" <?=($this->session->userdata('xxl') == 'on') ? 'checked' : '' ?>> XXL
+                      </label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input onchange="this.form.submit()" type="checkbox" name="xxxl" <?=($this->session->userdata('xxxl') == 'on') ? 'checked' : '' ?>> XXXL
+                      </label>
+                    </li>
+                    </form>
+                  </ul>
+                </div>
+                <?php if(!empty($featuredProductDetails)){
+                    $this->load->view('//product/_side_product_lising',[
+                        'featuredProductDetails' => $featuredProductDetails,
+                        'h2title' => 'Featured Products',
+                      ]);
+                  }?>
+              </aside><!-- Sidebar END -->
+            </div>
+          </div>
+
+      <?php if($links !='') {  ?>
+        <nav aria-label="Page navigation" class="pull-right">
+          <ul class="pagination">
+            <?php if (strpos($links, '<i class="material-icons arrow_back"></i>') === false) { ?>
+                 <li class="arrow disable">
+                  <a onclick="javascript:void()" aria-label="Previous">
+                    <i class="material-icons arrow_back"></i>
+                  </a>
+                </li>
+              <?php }
+              echo $links;
+              if (strpos($links, '<i class="material-icons arrow_forward"></i>') === false) { ?>
+               <li class="arrow disable">
+                <a onclick="javascript:void()" aria-label="Next">
+                  <i class="material-icons arrow_forward"></i>
+                </a>
+              </li>
+            <?php } ?>
+          </ul>
+	      </nav>'
+	  	<?php } ?>     
+        </div><!-- Content END -->
+      </main>
+
 <!-- end inner page content -->

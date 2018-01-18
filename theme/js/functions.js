@@ -98,3 +98,9 @@ function show_message_element(message_text)
 function findTarget(target) {
     window.open(target);// = target;
 }
+function priceFilter(category) {
+  min = $('#slider-margin-value-min').text().replace('₹', '');
+  max = $('#slider-margin-value-max').text().replace('₹', '');
+  url = 'find-'+category+'-'+min+'-to-'+max;
+  window.location.href = url;
+}

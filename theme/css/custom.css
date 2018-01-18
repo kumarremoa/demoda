@@ -58,6 +58,8 @@ i.material-icons.favorite_border.dark {
 .preview-box .slick-track img, .slick-slide .preview-box img{
     max-width: 264px;
     max-height: 330px;
+    min-width: 264px;
+    min-height: 330px;
 }
 .pagination li.arrow.disable a {
     color: #000;
@@ -69,4 +71,22 @@ i.material-icons.favorite_border.dark {
     color: #fff;
     background: #000;
     padding: 15px 17.5px 12px 17.5px;
+}
+.blog.preview-box img {
+    max-height: 237px;
+}
+h1.blog-head {
+    font-size: 32px;
+    line-height: 1.16;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+.tile-blog .tile-meta .meta-top .likes-qty i{
+    padding-right: 3px;
+}
+.tile-blog .tile-meta .meta-top .likes-qty i{
+    float: right;
+}
+.select.order-sorting select {
+    padding: 15px;
 }

@@ -30,6 +30,7 @@ class Blog extends CI_Controller {
 		$cart_details = $this->Usermodel->total_order_amount();		
 		$data['total_cart_items'] = $cart_details['total_cart_items'];
 		$data['total_amount'] = $cart_details['total_amount'];
+		$data['seoData'] = $this->getSeoComponents();
 		
 		// categories & subcategories
 		$data['header_categories'] = $this->Productmodel->getAllCategories();
@@ -37,7 +38,7 @@ class Blog extends CI_Controller {
 		$this->load->library('pagination');
 		$config['base_url'] = base_url().'blog';
 		$config['total_rows'] = $this->Blogmodel->total_articles(); // total records to paginate
-		$config['per_page'] = 1;
+		$config['per_page'] = 30;
 		$config['uri_segment'] = 2;
 		//$config['num_links'] = 1;
 		$config['use_page_numbers'] = TRUE;
@@ -64,7 +65,7 @@ class Blog extends CI_Controller {
 	public function detail($link_rewrite)
 	{		
 		$data['newsData'] = $this->Blogmodel->getBlogContent($link_rewrite);
-
+		$data['seoData'] = $this->getSeoComponents($data['product_details'][0]);
 		// show 404 error page if id does not exist in database
 		if(sizeof($data['newsData']) == 0)
 			show_404();
@@ -80,6 +81,23 @@ class Blog extends CI_Controller {
 		$this->load->view('template/header_new',$data);
 		$this->load->view('blog/blog-details',$data);
 		$this->load->view('template/footer_new');
+	}
+
+	public function getSeoComponents($category = null, $type = 'list')
+	{ //print_r($category);die;
+		if ($type == 'list') {
+			$seoData = [
+				'title' =>'Fashion Tips & Latest Updates',
+				'description' => 'What to wear, What not to wear? That is the question. Get solution to your fashion doubts and follow the latest fashion trends with Demoda.'
+			];
+		} elseif ($type == 'detail') {
+			$seoData = [
+			'title' => 'Demoda Secrets | Nightwear, Mothercare & Ethnic Wear',
+			'description' => 'Get widest collection of quality nighty, mothercare & ethnic wear at Demoda. Shop online for Sleepshirts, Nighties, Kurtis, Nightgowns & more.'
+			];
+		}
+		
+			return $seoData;
 	}
 	
 }

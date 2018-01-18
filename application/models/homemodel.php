@@ -55,7 +55,7 @@ class Homemodel extends CI_Model {
 	function getSliderImages()
 	{
 		//$sql = "select image from slider_images where is_active='1'";
-		$this->db->select('image');
+		$this->db->select('*');
 		$this->db->from('slider_images');
 		$this->db->where('is_active','1');
 		$recordSet = $this->db->get();

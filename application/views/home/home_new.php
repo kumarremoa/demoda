@@ -42,7 +42,7 @@
   </div>
 </section>
 
-<section class="fw-section no-cover padding-top-4x margin-bottom-2x">
+<section class="fw-section no-cover padding-top-4x margin-bottom-2x" style="background-image: url(img/homes/01.jpg)">
   <div class="container">
     <h2 class="block-title text-left margin-bottom-2x">
       Latest Updates
@@ -64,7 +64,7 @@
             ?>
           <div class="grid-item">
             <div class="tile tile-blog">
-              <div class="preview-box">
+              <div class="preview-box blog">
                 <img src="<?=$news_image?>" alt="<?=$value->article_title?>">
               </div>
 
@@ -74,17 +74,16 @@
 
               <div class="tile-meta">
                 <div class="meta-top">
-                  <span class="date"><?=date('d F, Y')// date_format($value->add_date ,'M D ,Y') ?></span>
                   <?php if(isset($value->place)){ ?>
                   <span class="place"><?=$value->place?></span>
                   <?php } ?>
-                  <span class="name">by <?=$value->author_name ?></span>
+                  <span class="name">-by <?=$value->author_name ?></span>
                 </div>
 
                 <p class="tile-text"><?=$description?> ...</p>
 
                 <div class="meta-bottom">
-                  <a href="#" class="comments-qty">36 Comments </a>
+                  <span  class="comments-qty"><?= date_format(date_create($value->add_date), 'M d, Y') ?> </span>
                   <span class="likes-qty"><i class="material-icons remove_red_eye"></i><?=$value->viewed_count ?></span>
                 </div>
               </div>

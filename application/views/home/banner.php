@@ -2,11 +2,12 @@
   <div class="rev_slider_wrapper">
    <div id="slider1" class="rev_slider"  data-version="5.0">
     <ul>
+    <?php foreach ($slider_images as $key => $slider) { ?>
       <li data-transition="fade">
 
-        <img src="img/slider/01.jpg"  alt="">
+        <img src="<?= $this->config->item('site_url').'admin/uploads/banner/large/'.$slider->image?>"  alt="<?=$slider->slider_text?>">
 
-         <div class="tp-caption rs-parallaxlevel-2"
+<!--          <div class="tp-caption rs-parallaxlevel-2"
             data-x="center" data-hoffset="['0','50','20','30']"
             data-y="center" data-voffset="['30','50','25','80']"
             data-fontsize="['173','120','95','60']"
@@ -45,8 +46,8 @@
             data-responsive_offset="on"
             data-start="2000"
 
-            style="color: #fff;">2016
-          </div>
+            style="color: #fff;"><?=date('Y')?>
+          </div> -->
 
          <div class="tp-caption"
             data-x="center" data-hoffset="['0','0','0','0']"
@@ -57,11 +58,13 @@
             data-responsive_offset="on"
             data-start="500">
 
-            <a href="http://8guild.com/" class="btn btn-arrow">Shop New Collection Now</a>
+            <a href="<?=$slider->slider_url?>" class="btn btn-arrow"><?=$slider->slider_text?></a>
+            
          </div>
       </li>
+      <?php } ?>
 
-    <li data-transition="fade">
+<!--     <li data-transition="fade">
 
        <img src="img/slider/02.jpg"  alt="">
 
@@ -147,7 +150,7 @@
            <a href="http://8guild.com/" class="btn btn-arrow">Shop New Collection Now</a>
         </div>
      </li>
-    </ul>
+ -->    </ul>
    </div>
   </div>
 </section>

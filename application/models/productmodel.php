@@ -9,16 +9,17 @@ class Productmodel extends CI_Model {
 	//get header menu Categories
 	function getAllCategories()
 	{
-		$this->db->select('c.id as category_id, c.title as category_title,c.cat_link_rewrite, s.id as sub_category_id,s.title as subcategory_title,s.sub_cat_link_rewrite');
+		$this->db->select('c.id as category_id, c.title as category_title,c.cat_link_rewrite, s.id as sub_category_id,s.title as subcategory_title,s.sub_cat_link_rewrite,count(p.id) as product_count');
 		$this->db->from('categories c');
-		$this->db->join('subcategories s','s.category_id=c.id','left');		
+		$this->db->join('subcategories s','s.category_id=c.id','left');
+		$this->db->join('products p','p.category_id=s.id','left');		
 		$this->db->where('c.active', '1');
 		$this->db->order_by('c.id', 'asc');
-		//$this->db->group_by('c.id');
+		$this->db->group_by('s.id');
 	
 		$recordSet = $this->db->get();
 	   //echo $this->db->last_query(); exit;
-		return $recordSet->result();
+		 return $recordSet->result();
 	}
 		
 	// new arrivals
@@ -205,15 +206,22 @@ class Productmodel extends CI_Model {
 	
 	function product_by_category($category_id,$limit,$start,$params = [])
 	{
-		if (!empty($params['price_range'])) {
-			$params['price_range']['min'];
-		}
 		$order_by = ($this->session->userdata('short_by') && $this->session->userdata('short_by') == 'price') ? '`p`.`price`' : '`p`.`id`' ;
 		$rs = array();
-		$this->db->select('`p`.`id` as product_id, `p`.*, `i`.`file_name`');
+		$sizeFliter = $this->setSizeFilter();
+		$this->db->select('`p`.`id` as product_id, `p`.*, `i`.`file_name`, s.title as sub_category_title, s.sub_cat_link_rewrite, c.title as category_title, c.cat_link_rewrite');
 		$this->db->from('products p');
 		$this->db->join('product_images i','i.product_id=p.id','left');
+		$this->db->join('subcategories s', 'p.category_id = s.id','left');
+		$this->db->join('categories c', 's.category_id = c.id','left');
 		$this->db->where("`i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id = '".$category_id."' AND p.quantity>0");
+		if (!empty($params['price_range'])) {
+			$this->db->where('p.price >='.$params['price_range']['min'].' and p.price <= '.$params['price_range']['max']);
+		}
+		if (!empty($sizeFliter)) {
+			$this->db->where("available_size like '%$sizeFliter%'");
+		}
+
 		$this->db->order_by("$order_by", 'desc');
 		$this->db->group_by('p.id');
 		$this->db->limit($limit, $start);
@@ -237,8 +245,63 @@ class Productmodel extends CI_Model {
 		return $rs;	
 	}
 	
+	function product_by_category_head_category($category_id,$limit,$start,$params = [])
+	{
+		$query  = 'select c.title as category_title, c.cat_link_rewrite, s.id as sub_category_id ,s.category_id, s.title as sub_category_title, s.sub_cat_link_rewrite from categories c inner join subcategories s on c.id= s.category_id where c.id ='.$category_id.' and c.active = 1';
+		$catData =  $this->db->query($query);
+		$catData = $catData->result();
+		$result = [];
+		foreach ($catData as $key => $value) {
+				if (!empty($params['price_range'])) {
+					$params['price_range']['min'];
+				}
+				$order_by = ($this->session->userdata('short_by') && $this->session->userdata('short_by') == 'price') ? '`p`.`price`' : '`p`.`id`' ;
+				$rs = array();
+				$this->db->select('`p`.`id` as product_id, `p`.*, `i`.`file_name`');
+				$this->db->from('products p');
+				$this->db->join('product_images i','i.product_id=p.id','left');
+				$this->db->where("`i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id = '".$value->sub_category_id."' AND p.quantity>0");
+				$this->db->order_by("$order_by", 'desc');
+				$this->db->group_by('p.id');
+				$this->db->limit($limit, $start);
+				$recordSet = $this->db->get();
+				if ($recordSet->num_rows>0) {
+					$rs = $recordSet->result();
+				}
+				$result = array_merge($result, $rs);
+		}
+		// ->result();
+		//echo"<pre>";print_r($recordSet);die;
+
+		return $result;
+		/*$sql = "SELECT `p`.`id` as product_id, `p`.*, `i`.`file_name` FROM (`products` p LEFT JOIN `product_images` i ON `i`.`product_id`=`p`.`id`) WHERE `i`.`is_featured` = '1' AND `p`.`is_active` = '1' AND p.category_id = '".$category_id."' AND p.quantity>0 GROUP BY `p`.`id` ORDER BY ".$order_by." desc LIMIT ".$start.",".$limit;
+		$recordSet = $this->db->query($sql);
+		if($recordSet->num_rows()>0)
+		{
+			$rs = $recordSet->result();
+		}*/
+		
+		//return $sql;
+		//echo $this->db->last_query(); exit;
+		return $rs;	
+	}
+
+
 	public function getCategoryName($category_id)
 	{
+
+		$this->db->select('c.id as parent_category_id,c.title as parent_category_title,s.id as sub_category_id,s.title as sub_category_title');
+		$this->db->from('subcategories s');
+		$this->db->join('categories c','c.id=s.category_id','left');;	
+		$this->db->where('s.id', $category_id);
+			
+		$recordSet = $this->db->get()->row();
+		return $recordSet;
+	}
+
+	public function getParentCategoryName($category_id)
+	{
+
 		$this->db->select('c.id as parent_category_id,c.title as parent_category_title,s.id as sub_category_id,s.title as sub_category_title');
 		$this->db->from('subcategories s');
 		$this->db->join('categories c','c.id=s.category_id','left');;	
@@ -253,6 +316,15 @@ class Productmodel extends CI_Model {
 		$this->db->select('s.*');
 		$this->db->from('subcategories s');
 		$this->db->where('s.sub_cat_link_rewrite', $cat_link_rewrite);
+		$recordSet = $this->db->get()->row();
+		return $recordSet;
+	}
+
+	public function getCatDataByLink($cat_link_rewrite)
+	{
+		$this->db->select('c.*');
+		$this->db->from('categories c');
+		$this->db->where('c.cat_link_rewrite', $cat_link_rewrite);
 		$recordSet = $this->db->get()->row();
 		return $recordSet;
 	}
@@ -279,6 +351,35 @@ class Productmodel extends CI_Model {
 			
 		$recordSet = $this->db->get();
 	  // echo $this->db->last_query(); exit;
+		return $recordSet->result();
+	}
+	public function setSizeFilter()
+	{
+		$size = [];
+		if (($this->session->userdata('s') == 'on')) {
+				$this->db->where("available_size like '%s%'");
+		}
+		if (($this->session->userdata('m') == 'on')) {
+				$this->db->where("available_size like '%m%'");
+		}if (($this->session->userdata('l') == 'on')) {
+				$this->db->where("available_size like '%l%'");
+		}if (($this->session->userdata('xl') == 'on')) {
+				$this->db->where("available_size like '%xl%'");
+		}if (($this->session->userdata('xxl') == 'on')) {
+				$this->db->where("available_size like '%xxl%'");
+		}if (($this->session->userdata('xxxl') == 'on')) {
+				$this->db->where("available_size like '%xxxl%'");
+		}
+		
+	}
+
+	public function getLowestPriceOfCategory($Categories)
+	{
+		$this->db->select('p.price');
+		$this->db->from('products p');
+		$this->db->limit(1);
+		$this->db->order_by('p.price');
+		$recordSet = $this->db->get();
 		return $recordSet->result();
 	}
 	
